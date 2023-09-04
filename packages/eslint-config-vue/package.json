@@ -1,20 +1,21 @@
 {
     "name": "@yx1126/eslint-config-vue",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "https://github.com/yx1126/lint-config",
     "license": "MIT",
     "author": "yx1126",
+    "files": ["*.js"],
     "main": "index.js",
     "peerDependencies": {
         "eslint": ">=7.4.0"
     },
     "dependencies": {
+        "@yx1126/eslint-config-basic": "workspace:^",
+        "@yx1126/eslint-config-ts": "workspace:^",
+        "eslint-plugin-vue": "^9.17.0",
         "local-pkg": "^0.4.3"
     },
     "devDependencies": {
-        "@yx1126/eslint-config-basic": "workspace:^",
-        "@yx1126/eslint-config-ts": "workspace:^",
-        "eslint": "^8.48.0",
-        "eslint-plugin-vue": "^9.17.0"
+        "eslint": "^8.48.0"
     }
 }

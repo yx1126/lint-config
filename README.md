@@ -39,16 +39,19 @@ Add the following settings to your `settings.json`:
 {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
+        "source.fixAll.eslint": false,
     },
     "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
         "vue",
-        "json",
-        "jsonc",
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"jsonc",
+		"json",
+		"json5",
+		"yaml",
+		"yml"
     ]
 }
 ```
@@ -70,4 +73,4 @@ module.exports = {
 
 ## License
 
-[MIT](./LICENSE) License &copy; 2022 [yx1126](https://github.com/yx1126)
+[MIT](./LICENSE) License &copy; 2023 [Ch Yang](https://github.com/yx1126)
