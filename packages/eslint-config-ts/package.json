@@ -1,6 +1,6 @@
 {
     "name": "@yx1126/eslint-config-ts",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "homepage": "https://github.com/yx1126/lint-config",
     "license": "MIT",
     "author": "yx1126",
@@ -13,8 +13,7 @@
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^6.5.0",
         "@typescript-eslint/parser": "^6.5.0",
-        "@yx1126/eslint-config-basic": "workspace:^",
-        "eslint-import-resolver-typescript": "^3.6.0"
+        "@yx1126/eslint-config-basic": "workspace:^"
     },
     "devDependencies": {
         "eslint": "^8.48.0"

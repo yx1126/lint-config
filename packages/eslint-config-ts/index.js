@@ -6,36 +6,9 @@ const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json";
 module.exports = {
     extends: [
         "@yx1126/eslint-config-basic",
-        "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
     ],
-    settings: {
-        "import/parsers": {
-            "@typescript-eslint/parser": [".ts", ".tsx"],
-        },
-        "import/resolver": {
-            typescript: {
-                alwaysTryTypes: true,
-                project: [tsconfig],
-            },
-            node: {
-                extensions: [".js", ".jsx", ".mjs", ".ts", ".tsx", ".d.ts"],
-            },
-        },
-    },
     overrides: basic.overrides.concat([
-        {
-            files: ["*.js", "*.jsx", "*.mjs", "*.cjs"],
-            rules: {
-                "@typescript-eslint/no-var-requires": "off",
-            },
-        },
-        {
-            files: ["*.d.ts"],
-            rules: {
-                "import/no-duplicates": "off",
-            },
-        },
         {
             files: ["*.ts", "*.tsx", "*.mts", "*.cts"],
             parser: "@typescript-eslint/parser",
@@ -57,7 +30,7 @@ module.exports = {
         },
     ]),
     rules: {
-        "import/no-unresolved": "error",
+        "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "no-undef": "off",
         "@typescript-eslint/no-explicit-any": "off",

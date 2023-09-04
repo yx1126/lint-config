@@ -25,17 +25,9 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:jsonc/recommended-with-jsonc",
-        "plugin:import/recommended",
         "plugin:yml/standard",
     ],
-    plugins: ["promise", "import"],
-    settings: {
-        "import/resolver": {
-            node: {
-                extensions: [".js", ".mjs"],
-            },
-        },
-    },
+    plugins: ["promise"],
     overrides: [
         {
             files: ["*.js", "*.jsx", "*.mjs", "*.cjs"],
