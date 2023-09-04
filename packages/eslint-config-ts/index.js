@@ -1,17 +1,23 @@
-const { defineConfig } = require("eslint-define-config");
 const basic = require("@yx1126/eslint-config-basic");
-const process = require("node:process")
+const process = require("node:process");
 
-const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json"
+const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json";
 
-module.exports = defineConfig({
+module.exports = {
     extends: [
         "@yx1126/eslint-config-basic",
         "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
     ],
     settings: {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"],
+        },
         "import/resolver": {
+            typescript: {
+                alwaysTryTypes: true,
+                project: [tsconfig],
+            },
             node: {
                 extensions: [".js", ".jsx", ".mjs", ".ts", ".tsx", ".d.ts"],
             },
@@ -19,19 +25,15 @@ module.exports = defineConfig({
     },
     overrides: basic.overrides.concat([
         {
-            files: ["*.d.ts"],
+            files: ["*.js", "*.jsx", "*.mjs", "*.cjs"],
             rules: {
-                "import/no-duplicates": "off",
+                "@typescript-eslint/no-var-requires": "off",
             },
         },
         {
-            files: ["*.js", "*.cjs", "*.jsx"],
+            files: ["*.d.ts"],
             rules: {
-                "indent": ["error", 4],
-                "quotes": "off",
-                "@typescript-eslint/indent": "off",
-                "no-var-requires": "off",
-                "@typescript-eslint/no-var-requires": "off",
+                "import/no-duplicates": "off",
             },
         },
         {
@@ -41,7 +43,7 @@ module.exports = defineConfig({
             parserOptions: {
                 ecmaVersion: "latest",
                 tsconfigRootDir: process.cwd(),
-                project: [tsconfig]
+                project: [tsconfig],
             },
             rules: {
                 "indent": "off",
@@ -55,6 +57,7 @@ module.exports = defineConfig({
         },
     ]),
     rules: {
+        "import/no-unresolved": "error",
         "@typescript-eslint/ban-ts-comment": "off",
         "no-undef": "off",
         "@typescript-eslint/no-explicit-any": "off",
@@ -86,4 +89,4 @@ module.exports = defineConfig({
         "@typescript-eslint/type-annotation-spacing": ["error"],
         "@typescript-eslint/member-delimiter-style": ["error"],
     },
-});
+};

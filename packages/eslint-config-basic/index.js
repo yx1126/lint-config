@@ -1,6 +1,4 @@
-const { defineConfig } = require("eslint-define-config");
-
-module.exports = defineConfig({
+module.exports = {
     root: true,
     env: {
         browser: true,
@@ -28,7 +26,7 @@ module.exports = defineConfig({
         "eslint:recommended",
         "plugin:jsonc/recommended-with-jsonc",
         "plugin:import/recommended",
-        "plugin:yml/standard"
+        "plugin:yml/standard",
     ],
     plugins: ["promise", "import"],
     settings: {
@@ -40,18 +38,12 @@ module.exports = defineConfig({
     },
     overrides: [
         {
-            files: ["*.ts", "*.tsx", "*.mts", "*.cts"],
-            parser: "@typescript-eslint/parser",
-            plugins: ["@typescript-eslint"],
-            parserOptions: {
-                ecmaVersion: "latest",
-                tsconfigRootDir: process.cwd(),
-                project: ["tsconfig.json"],
-            },
+            files: ["*.js", "*.jsx", "*.mjs", "*.cjs"],
             rules: {
                 "indent": ["error", 4],
                 "comma-dangle": ["error", "always-multiline"],
                 "semi": ["error"],
+                "no-var-requires": "off",
             },
         },
         {
@@ -61,8 +53,8 @@ module.exports = defineConfig({
                 "jsonc/array-bracket-newline": ["error",
                     {
                         "multiline": true,
-                        "minItems": null
-                    }
+                        "minItems": null,
+                    },
                 ],
                 "jsonc/array-bracket-spacing": ["error", "never"],
                 "jsonc/indent": ["error", 4],
@@ -72,12 +64,12 @@ module.exports = defineConfig({
                     {
                         "beforeColon": false,
                         "afterColon": true,
-                        "mode": "strict"
-                    }
+                        "mode": "strict",
+                    },
                 ],
                 "jsonc/object-curly-newline": ["error", { multiline: true, consistent: true }],
                 "jsonc/object-curly-spacing": ["error", "always"],
-                "jsonc/quotes": ["error", "double"]
+                "jsonc/quotes": ["error", "double"],
             },
         },
         {
@@ -149,7 +141,7 @@ module.exports = defineConfig({
                             "default",
                         ],
                     },
-                ]
+                ],
             },
         },
     ],
@@ -191,4 +183,4 @@ module.exports = defineConfig({
         "object-curly-spacing": ["error", "always"],
         "space-before-blocks": "off",
     },
-});
+};
