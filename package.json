@@ -14,7 +14,8 @@
     "author": "yx1126",
     "scripts": {
         "lint": "eslint .",
-        "lint:fix": "eslint . --fix"
+        "lint:fix": "eslint . --fix",
+        "release": "pnpm -r publish --access public"
     },
     "devDependencies": {
         "@types/node": "^20.5.7",
