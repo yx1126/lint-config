@@ -1,0 +1,66 @@
+{
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": false,
+    },
+    "eslint.format.enable": true,
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "eslint.options": {
+        "extensions": [
+            ".vue",
+            ".js",
+            ".ts",
+            ".jsx",
+            ".tsx",
+            ".cjs",
+            ".mjs",
+            ".cts",
+            ".mts",
+            ".html",
+            ".html5",
+        ]
+    },
+    "eslint.validate": [
+        "vue",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "jsonc",
+        "json",
+        "json5",
+        "yaml",
+        "yml"
+    ],
+    "editor.cursorSmoothCaretAnimation": "on",
+    "[typescript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[json5]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    }
+}

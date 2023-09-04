@@ -1,0 +1,14 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "exclude": [
+        "node_modules",
+        "dist"
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "es2020",
+        "module": "es2020",
+        "moduleResolution": "Bundler",
+        "esModuleInterop": true
+    }
+}

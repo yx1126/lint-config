@@ -1,0 +1,26 @@
+{
+    "name": "lint-config",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [
+        "lint",
+        "eslint",
+        "stylelint",
+        "eslint-config",
+        "stylelint-config"
+    ],
+    "homepage": "https://github.com/yx1126/lint-config",
+    "license": "MIT",
+    "author": "yx1126",
+    "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "devDependencies": {
+        "@types/node": "^20.5.7",
+        "@yx1126/eslint-config": "workspace:^",
+        "eslint": "^8.48.0",
+        "eslint-define-config": "^1.23.0",
+        "typescript": "^5.2.2"
+    }
+}

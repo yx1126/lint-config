@@ -1,0 +1,19 @@
+{
+    "name": "@yx1126/eslint-config-ts",
+    "version": "0.0.1",
+    "homepage": "https://github.com/yx1126/lint-config",
+    "license": "MIT",
+    "author": "yx1126",
+    "files": ["*.js"],
+    "main": "index.js",
+    "peerDependencies": {
+        "eslint": ">=7.4.0",
+        "typescript": ">=3.9"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^6.5.0",
+        "@typescript-eslint/parser": "^6.5.0",
+        "@yx1126/eslint-config-basic": "workspace:^",
+        "eslint": "^8.48.0"
+    }
+}

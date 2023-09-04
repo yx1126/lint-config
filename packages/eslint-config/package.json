@@ -1,0 +1,20 @@
+{
+    "name": "@yx1126/eslint-config",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [
+        "eslint",
+        "eslint-config"
+    ],
+    "homepage": "https://github.com/yx1126/lint-config",
+    "license": "MIT",
+    "author": "yx1126",
+    "files": ["*.js"],
+    "main": "index.js",
+    "peerDependencies": {
+        "eslint": ">=7.4.0"
+    },
+    "dependencies": {
+        "@yx1126/eslint-config-vue": "workspace:^"
+    }
+}
