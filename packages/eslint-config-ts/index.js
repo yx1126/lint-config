@@ -61,5 +61,14 @@ module.exports = {
         "@typescript-eslint/space-before-blocks": ["error"],
         "@typescript-eslint/type-annotation-spacing": ["error"],
         "@typescript-eslint/member-delimiter-style": ["error"],
+        "@typescript-eslint/ban-types": [
+            "error",
+            {
+                extendDefaults: true,
+                types: {
+                    Function: false,
+                },
+            },
+        ],
     },
 };
