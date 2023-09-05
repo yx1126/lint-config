@@ -58,13 +58,13 @@ Add the following settings to your `settings.json`:
 
 ### TypeScript Aware Rules
 
-Type aware rules are enabled when a `tsconfig.json` is found in the project root, which will introduce some stricter rules into your project. If you want to enable it while have no `tsconfig.json` in the project root, you can change tsconfig name by modifying `ESLINT_TSCONFIG` env.
+Type aware rules are enabled when a `tsconfig.json` is found in the project root, which will introduce some stricter rules into your project. If you want to use for example `tsconfig.eslint.json` in the project root, you can change tsconfig name by modifying `ESLINT_TSCONFIG` env.
 
 ```js
 // .eslintrc.js
 const process = require("node:process");
 
-process.env.ESLINT_TSCONFIG = "tsconfig.json";
+process.env.ESLINT_TSCONFIG = "tsconfig.eslint.json";
 
 module.exports = {
     extends: "@yx1126/eslint-config"
