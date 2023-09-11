@@ -1,7 +1,7 @@
 const basic = require("@yx1126/eslint-config-basic");
 const process = require("node:process");
 
-const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json";
+const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.lint.json";
 
 module.exports = {
     extends: [
@@ -20,12 +20,14 @@ module.exports = {
             },
             rules: {
                 "indent": "off",
-                "quotes": "off",
                 "@typescript-eslint/indent": ["error", 4],
                 "comma-dangle": "off",
                 "@typescript-eslint/comma-dangle": ["error", "always-multiline"],
                 "semi": "off",
                 "@typescript-eslint/semi": ["error"],
+                "@typescript-eslint/await-thenable": "error",
+                "@typescript-eslint/consistent-type-exports": "error",
+                "@typescript-eslint/consistent-type-imports": "error",
             },
         },
     ]),
@@ -39,11 +41,12 @@ module.exports = {
         "func-call-spacing": "off",
         "@typescript-eslint/func-call-spacing": ["error", "never"],
         "@typescript-eslint/no-non-null-assertion": "off",
-        "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+        "quotes": "off",
         "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }],
         "space-infix-ops": "off",
         "@typescript-eslint/space-infix-ops": ["error"],
-        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^no_" }],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^no_" }],
         "space-before-function-paren": "off",
         "@typescript-eslint/space-before-function-paren": ["error", {
             "anonymous": "never",
@@ -70,5 +73,7 @@ module.exports = {
                 },
             },
         ],
+        "no-extra-semi": "off",
+        "@typescript-eslint/no-extra-semi": "error",
     },
 };

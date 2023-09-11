@@ -146,7 +146,7 @@ module.exports = {
         "no-non-null-assertion": "off",
         "quotes": ["error", "double", { "allowTemplateLiterals": true }],
         "space-infix-ops": ["error"],
-        "no-unused-vars": ["warn", { "argsIgnorePattern": "^no_" }],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^no_" }],
         "space-before-function-paren": ["error", {
             "anonymous": "never",
             "named": "never",
@@ -170,9 +170,11 @@ module.exports = {
                 "if": { "after": false },
                 "for": { "after": false },
                 "while": { "after": false },
+                "switch": { "after": false },
             },
         }],
         "object-curly-spacing": ["error", "always"],
         "space-before-blocks": "off",
+        "no-async-promise-executor": "off",
     },
 };
