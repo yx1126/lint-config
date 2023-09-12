@@ -1,6 +1,6 @@
 {
     "name": "lint-config",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "private": true,
     "description": "",
     "keywords": [
@@ -10,9 +10,16 @@
         "eslint-config",
         "stylelint-config"
     ],
-    "homepage": "https://github.com/yx1126/lint-config",
     "license": "MIT",
     "author": "yx1126",
+    "homepage": "https://github.com/yx1126/lint-config#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yx1126/lint-config.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yx1126/lint-config/issues"
+    },
     "publishConfig": {
         "access": "public"
     },
