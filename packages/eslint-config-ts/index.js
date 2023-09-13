@@ -28,6 +28,8 @@ module.exports = {
                 "@typescript-eslint/await-thenable": "error",
                 "@typescript-eslint/consistent-type-exports": "error",
                 "@typescript-eslint/consistent-type-imports": "error",
+                "no-unused-vars": "off",
+                "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^no_" }],
             },
         },
     ]),
@@ -45,8 +47,6 @@ module.exports = {
         "@typescript-eslint/quotes": ["error", "double", { "allowTemplateLiterals": true }],
         "space-infix-ops": "off",
         "@typescript-eslint/space-infix-ops": ["error"],
-        "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^no_" }],
         "space-before-function-paren": "off",
         "@typescript-eslint/space-before-function-paren": ["error", {
             "anonymous": "never",

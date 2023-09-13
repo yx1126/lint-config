@@ -1,6 +1,6 @@
 {
     "name": "@yx1126/eslint-config-vue",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "license": "MIT",
     "author": "yx1126",
     "files": ["*.js"],
@@ -13,7 +13,8 @@
         "@yx1126/eslint-config-basic": "workspace:^",
         "@yx1126/eslint-config-ts": "workspace:^",
         "eslint-plugin-vue": "^9.17.0",
-        "local-pkg": "^0.4.3"
+        "local-pkg": "^0.4.3",
+        "vue-demi": "^0.14.6"
     },
     "devDependencies": {
         "eslint": "^8.48.0"
