@@ -1,0 +1,12 @@
+{
+    "name": "@yx1126/lint-config-utils",
+    "version": "0.0.11",
+    "license": "MIT",
+    "author": "yx1126",
+    "files": ["*.js"],
+    "main": "index.js",
+    "homepage": "https://github.com/yx1126/lint-config",
+    "dependencies": {
+        "fs-extra": "^11.1.1"
+    }
+}

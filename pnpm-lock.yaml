@@ -65,6 +65,9 @@ importers:
       '@yx1126/eslint-config-vue':
         specifier: workspace:^
         version: link:../eslint-config-vue
+      '@yx1126/lint-config-utils':
+        specifier: workspace:^
+        version: link:../utils
       eslint:
         specifier: '>=7.4.0'
         version: 8.48.0
@@ -83,9 +86,6 @@ importers:
       jsonc-eslint-parser:
         specifier: ^2.3.0
         version: 2.3.0
-      local-pkg:
-        specifier: ^0.4.3
-        version: 0.4.3
       yaml-eslint-parser:
         specifier: ^1.2.2
         version: 1.2.2
@@ -139,16 +139,22 @@ importers:
       '@yx1126/eslint-config-ts':
         specifier: workspace:^
         version: link:../eslint-config-ts
+      '@yx1126/lint-config-utils':
+        specifier: workspace:^
+        version: link:../utils
       eslint-plugin-vue:
         specifier: ^9.17.0
         version: 9.17.0(eslint@8.48.0)
-      local-pkg:
-        specifier: ^0.4.3
-        version: 0.4.3
     devDependencies:
       eslint:
         specifier: ^8.48.0
         version: 8.48.0
+
+  packages/utils:
+    dependencies:
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.1.1
 
   packages/version: {}
 
@@ -1554,6 +1560,15 @@ packages:
   /flatted@3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
 
+  /fs-extra@11.1.1:
+    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
+    engines: {node: '>=14.14'}
+    dependencies:
+      graceful-fs: 4.2.11
+      jsonfile: 6.1.0
+      universalify: 2.0.1
+    dev: false
+
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
@@ -1629,7 +1644,6 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
-    dev: true
 
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
@@ -1780,6 +1794,14 @@ packages:
       semver: 7.5.4
     dev: false
 
+  /jsonfile@6.1.0:
+    resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
+    dependencies:
+      universalify: 2.0.1
+    optionalDependencies:
+      graceful-fs: 4.2.11
+    dev: false
+
   /keyv@4.5.3:
     resolution: {integrity: sha512-QCiSav9WaX1PgETJ+SpNnx2PRRapJ/oRSXM4VO5OGYGSjrxbKPVFVhB3l2OCbLCk329N8qyAtsJjSjvVBWzEug==}
     dependencies:
@@ -1805,11 +1827,6 @@ packages:
       strip-bom: 4.0.0
       type-fest: 0.6.0
     dev: true
-
-  /local-pkg@0.4.3:
-    resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
-    engines: {node: '>=14'}
-    dev: false
 
   /locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
@@ -2356,6 +2373,11 @@ packages:
     dependencies:
       crypto-random-string: 2.0.0
     dev: true
+
+  /universalify@2.0.1:
+    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
+    engines: {node: '>= 10.0.0'}
+    dev: false
 
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}

@@ -1,15 +1,13 @@
-const { isPackageExists, getPackageInfoSync } = require("local-pkg");
+const { isTs, getPackageVersion } = require("@yx1126/lint-config-utils");
 
-const vue = getPackageInfoSync("vue");
-
-const isExistTs = isPackageExists("typescript");
+const vue = getPackageVersion("vue");
 
 const isVue2 = vue && vue.version.startsWith("2.");
 
 module.exports = {
     extends: [
         isVue2 ? "plugin:vue/recommended" : "plugin:vue/vue3-recommended",
-        isExistTs ? "@yx1126/eslint-config-ts" : "@yx1126/eslint-config-basic",
+        isTs ? "@yx1126/eslint-config-ts" : "@yx1126/eslint-config-basic",
     ],
     overrides: [
         {

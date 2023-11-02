@@ -1,6 +1,6 @@
 {
     "name": "@yx1126/eslint-config",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "",
     "keywords": [
         "eslint",
@@ -27,12 +27,12 @@
         "@yx1126/eslint-config-basic": "workspace:^",
         "@yx1126/eslint-config-ts": "workspace:^",
         "@yx1126/eslint-config-vue": "workspace:^",
+        "@yx1126/lint-config-utils": "workspace:^",
         "eslint-plugin-jsonc": "^2.9.0",
         "eslint-plugin-promise": "^6.1.1",
         "eslint-plugin-vue": "^9.17.0",
         "eslint-plugin-yml": "^1.8.0",
         "jsonc-eslint-parser": "^2.3.0",
-        "local-pkg": "^0.4.3",
         "yaml-eslint-parser": "^1.2.2"
     }
 }

@@ -21,7 +21,7 @@ const mainPath = path.join(workspaceRoot, "package.json");
     for(let i = 0; i < workspaces.length; i++) {
         const item = workspaces[i];
         const { name } = path.parse(item.dir);
-        const v = versions.find(v => v.file.test(name));
+        const v = versions.find(v => (Array.isArray(v.file) ? v.file : [v.file]).some(reg => reg.test(name)));
         if(!item.manifest.private && item.manifest.version && v) {
             item.manifest.version = v.version;
             await item.writeProjectManifest(item.manifest);
