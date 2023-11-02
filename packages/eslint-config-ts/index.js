@@ -29,7 +29,7 @@ module.exports = {
                 "@typescript-eslint/consistent-type-exports": "error",
                 "@typescript-eslint/consistent-type-imports": "error",
                 "no-unused-vars": "off",
-                "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^no_" }],
+                "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
             },
         },
     ]),

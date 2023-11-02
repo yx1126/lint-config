@@ -176,5 +176,6 @@ module.exports = {
         "object-curly-spacing": ["error", "always"],
         "space-before-blocks": "off",
         "no-async-promise-executor": "off",
+        "no-inner-declarations": "off",
     },
 };

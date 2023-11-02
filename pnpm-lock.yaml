@@ -56,6 +56,12 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.5.0
         version: 6.5.0(eslint@8.48.0)(typescript@5.2.2)
+      '@yx1126/eslint-config-basic':
+        specifier: workspace:^
+        version: link:../eslint-config-basic
+      '@yx1126/eslint-config-ts':
+        specifier: workspace:^
+        version: link:../eslint-config-ts
       '@yx1126/eslint-config-vue':
         specifier: workspace:^
         version: link:../eslint-config-vue

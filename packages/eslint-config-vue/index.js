@@ -1,11 +1,14 @@
 const { isPackageExists, getPackageInfoSync } = require("local-pkg");
 
-const isExistTs = isPackageExists("typescript");
 const vue = getPackageInfoSync("vue");
+
+const isExistTs = isPackageExists("typescript");
+
+const isVue2 = vue && vue.version.startsWith("2.");
 
 module.exports = {
     extends: [
-        vue && vue.version.startsWith("2.") ? "plugin:vue/recommended" : "plugin:vue/vue3-recommended",
+        isVue2 ? "plugin:vue/recommended" : "plugin:vue/vue3-recommended",
         isExistTs ? "@yx1126/eslint-config-ts" : "@yx1126/eslint-config-basic",
     ],
     overrides: [
@@ -43,5 +46,6 @@ module.exports = {
         "vue/singleline-html-element-content-newline": "off",
         "vue/one-component-per-file": "off",
         "vue/no-reserved-component-names": "off",
+        "vue/component-name-in-template-casing": ["error", "kebab-case", { "ignores": ["/^[A-Z][a-z0-9]+$/"] }],
     },
 };
