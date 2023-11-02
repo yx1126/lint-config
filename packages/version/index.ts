@@ -7,5 +7,5 @@ export interface PackageOptions {
  * versions
  */
 export const versions: Array<PackageOptions> = [
-    { version: "0.0.11", file: [/^eslint-/, /utils/] },
+    { version: "0.0.12", file: [/^eslint-/, /lint-config-utils/] },
 ];

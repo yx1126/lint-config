@@ -2,7 +2,7 @@ const { isTs, getPackageVersion } = require("@yx1126/lint-config-utils");
 
 const vue = getPackageVersion("vue");
 
-const isVue2 = vue && vue.version.startsWith("2.");
+const isVue2 = vue && vue.startsWith("^2.");
 
 module.exports = {
     extends: [
