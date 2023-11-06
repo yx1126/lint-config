@@ -7,7 +7,7 @@ const isVue2 = vue && vue.startsWith("^2.");
 module.exports = {
     extends: [
         isVue2 ? "plugin:vue/recommended" : "plugin:vue/vue3-recommended",
-        isTs() ? "@yx1126/eslint-config-ts" : "@yx1126/eslint-config-basic",
+        isTs ? "@yx1126/eslint-config-ts" : "@yx1126/eslint-config-basic",
     ],
     overrides: [
         {

@@ -1,30 +1,29 @@
 const fs = require("fs-extra");
 const { resolve: _resolve }  = require("path");
 
-function resolveJson(name) {
+function readJson(name) {
     try {
-        return fs.readJsonSync(_resolve(process.cwd(), ".", name)) || {};
+        return fs.readJsonSync(_resolve(process.cwd(), ".", name));
     } catch (error) {
         return;
     }
 }
 
-function isTs() {
-    return resolveJson("tsconfig.json");
-}
+const isTs = readJson("tsconfig.json");
 
 function getPackageVersion(name) {
-    const { devDependencies, dependencies } = resolveJson("package.json");
-    if(devDependencies[name]) {
+    const { devDependencies, dependencies } = readJson("package.json") || {};
+
+    if(devDependencies && devDependencies[name]) {
         return devDependencies[name];
     }
-    if(dependencies[name]) {
+    if(dependencies && dependencies[name]) {
         return dependencies[name];
     }
 }
 
 module.exports = {
-    resolveJson,
+    readJson,
     isTs,
     getPackageVersion,
 };

@@ -1,6 +1,6 @@
 {
     "name": "@yx1126/lint-config-utils",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "author": "yx1126",
     "files": ["*.js"],
