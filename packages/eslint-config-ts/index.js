@@ -1,7 +1,7 @@
 const basic = require("@yx1126/eslint-config-basic");
 const process = require("node:process");
 
-const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.lint.json";
+const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json";
 
 module.exports = {
     extends: [
@@ -16,7 +16,7 @@ module.exports = {
             parserOptions: {
                 ecmaVersion: "latest",
                 tsconfigRootDir: process.cwd(),
-                project: [tsconfig],
+                project: Array.isArray(tsconfig) ? tsconfig : [tsconfig],
             },
             rules: {
                 "indent": "off",
