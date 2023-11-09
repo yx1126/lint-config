@@ -1,8 +1,9 @@
 const basic = require("@yx1126/eslint-config-basic");
 const process = require("node:process");
+const { parseString } = require("@yx1126/lint-config-utils");
 
-const tsconfig = process.env.ESLINT_TSCONFIG || "tsconfig.json";
-const parserOptions = process.env.TS_PARSER_OPTIONS || {};
+const tsconfig = parseString(process.env.ESLINT_TSCONFIG, "tsconfig.json");
+const parserOptions = parseString(process.env.TS_PARSER_OPTIONS, {});
 
 module.exports = {
     extends: [

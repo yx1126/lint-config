@@ -22,8 +22,17 @@ function getPackageVersion(name) {
     }
 }
 
+function parseString(value, defaultValue) {
+    try {
+        return value ? JSON.parse(value) : defaultValue;
+    } catch (error) {
+        return value;
+    }
+}
+
 module.exports = {
     readJson,
     isTs,
     getPackageVersion,
+    parseString,
 };

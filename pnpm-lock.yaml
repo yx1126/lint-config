@@ -123,6 +123,9 @@ importers:
       '@yx1126/eslint-config-basic':
         specifier: workspace:^
         version: link:../eslint-config-basic
+      '@yx1126/lint-config-utils':
+        specifier: workspace:^
+        version: link:../lint-config-utils
       typescript:
         specifier: '>=3.9'
         version: 5.2.2
