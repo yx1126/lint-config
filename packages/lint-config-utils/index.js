@@ -1,9 +1,11 @@
 const fs = require("fs-extra");
+const json5 = require("json5");
 const { resolve: _resolve }  = require("path");
 
 function readJson(name) {
     try {
-        return fs.readJsonSync(_resolve(process.cwd(), ".", name));
+        const jsonStr = fs.readFileSync(_resolve(process.cwd(), ".", name));
+        return json5.parse(jsonStr);
     } catch (error) {
         return;
     }

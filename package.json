@@ -1,6 +1,6 @@
 {
     "name": "lint-config",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "private": true,
     "description": "",
     "keywords": [
@@ -42,6 +42,7 @@
         "eslint-define-config": "^1.23.0",
         "esno": "^0.17.0",
         "semver": "^7.5.4",
+        "stylelint": "^15.11.0",
         "typescript": "^5.2.2"
     }
 }
