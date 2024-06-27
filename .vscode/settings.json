@@ -1,7 +1,7 @@
 {
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": false,
+        "source.fixAll.eslint": "never"
     },
     "eslint.format.enable": true,
     "eslint.codeAction.showDocumentation": {

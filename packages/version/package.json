@@ -1,9 +1,0 @@
-{
-    "name": "@yx1126/version",
-    "private": true,
-    "author": "yx1126",
-    "main": "index.ts",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    }
-}

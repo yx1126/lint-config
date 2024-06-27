@@ -1,0 +1,4 @@
+declare module "eslint-plugin-vue" {
+    const value: any;
+    export default value;
+}

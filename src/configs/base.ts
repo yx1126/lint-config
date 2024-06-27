@@ -1,0 +1,207 @@
+import type { FlatESLintConfig, BaseConfig, DeprecatedConfig } from "../types";
+
+function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rules"] {
+    return {
+        "array-callback-return": ["error", {
+            allowImplicit: true,
+            checkForEach: true
+        }],
+        "constructor-super": "error",
+        "for-direction": "error",
+        "getter-return": "error",
+        "no-async-promise-executor": "off",
+        "no-case-declarations": "error",
+        "no-class-assign": "error",
+        "no-compare-neg-zero": "error",
+        "no-cond-assign": "error",
+        "no-const-assign": "error",
+        "no-constant-binary-expression": "error",
+        "no-constant-condition": "error",
+        "no-control-regex": "error",
+        "no-debugger": "error",
+        "no-dupe-args": "error",
+        "no-dupe-class-members": "error",
+        "no-dupe-else-if": "error",
+        "no-dupe-keys": "error",
+        "no-duplicate-case": "error",
+        "no-duplicate-imports": ["error", {
+            includeExports: true
+        }],
+        "no-empty-character-class": "error",
+        "no-empty-pattern": "error",
+        "no-ex-assign": "error",
+        "no-fallthrough": "error",
+        "no-func-assign": "error",
+        "no-import-assign": "error",
+        "no-invalid-regexp": "error",
+        "no-irregular-whitespace": "error",
+        "no-loss-of-precision": "error",
+        "no-misleading-character-class": "error",
+        "no-new-native-nonconstructor": "error",
+        "no-obj-calls": "error",
+        "no-promise-executor-return": "error",
+        "no-prototype-builtins": "error",
+        "no-self-assign": "error",
+        "no-self-compare": "error",
+        "no-setter-return": "error",
+        "no-sparse-arrays": "error",
+        "no-template-curly-in-string": "off",
+        "no-this-before-super": "error",
+        "no-undef": "off",
+        "no-unexpected-multiline": "error",
+        "no-unmodified-loop-condition": "off",
+        "no-unreachable": "error",
+        "no-unsafe-finally": "error",
+        "no-unsafe-negation": "error",
+        "no-unsafe-optional-chaining": "error",
+        "no-unused-vars": ["error", {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_"
+        }],
+        "no-use-before-define": ["error", {
+            functions: false,
+            classes: false,
+            variables: true,
+            allowNamedExports: false,
+        }],
+        "no-useless-backreference": "error",
+        "no-useless-catch": "error",
+        "no-useless-escape": "off",
+        "require-yield": "error",
+        "use-isnan": "error",
+        "valid-typeof": "error",
+        "no-unused-private-class-members": "error",
+
+        // Suggestions
+        "block-scoped-var": "error",
+        "no-alert": "error",
+        "no-console": "error",
+        "no-delete-var": "error",
+        "no-else-return": ["error", {
+            allowElseIf: false,
+        }],
+        "no-empty": "error",
+        "no-eval": "error",
+        "no-extra-bind": "error",
+        "no-global-assign": "error",
+        "no-label-var": "error",
+        "no-redeclare": "error",
+        "no-regex-spaces": "error",
+        "no-unused-labels": "error",
+        "no-var": "error",
+        "no-with": "error",
+        "prefer-const": "error",
+        "func-name-matching": "error",
+        "no-extra-boolean-cast": "error",
+        "no-nonoctal-decimal-escape": "error",
+        "no-shadow-restricted-names": "error",
+        "no-throw-literal": "error",
+        ...rules
+    }
+}
+
+// Deprecated
+function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
+    return {
+        "no-new-symbol": "error",
+        "array-bracket-spacing": ["error", "never"],
+        "arrow-spacing": "error",
+        "block-spacing": "error",
+        "brace-style": ["error", "1tbs", {
+            allowSingleLine: true,
+        }],
+        "comma-spacing": "error",
+        "comma-style": "error",
+        "computed-property-spacing": "error",
+        "func-call-spacing": "error",
+        "function-call-argument-newline": ["error", "consistent"],
+        "function-paren-newline": "error",
+        "implicit-arrow-linebreak": "error",
+        "indent": ["error", config?.indent ?? 4],
+        "jsx-quotes": "error",
+        "key-spacing": ["error", {
+            "mode": "strict",
+        }],
+        "keyword-spacing": ["error", {
+            overrides: {
+                "if": { "after": false },
+                "for": { "after": false },
+                "while": { "after": false },
+                "switch": { "after": false },
+            },
+        }],
+        "no-multi-spaces": "error",
+        "no-multiple-empty-lines": ["error", {
+            max: 1
+        }],
+        "no-whitespace-before-property": "error",
+        "object-curly-spacing": ["error", "always"],
+        "padded-blocks": ["error", "never"],
+        "quotes": ["error", "double", {
+            allowTemplateLiterals: true,
+            avoidEscape: false
+        }],
+        "rest-spread-spacing": "error",
+        "space-before-blocks": "error",
+        "space-before-function-paren": ["error", {
+            "anonymous": "never",
+            "named": "never",
+            "asyncArrow": "always",
+        }],
+        "space-in-parens": "error",
+        "switch-colon-spacing": "error",
+        "template-curly-spacing": "error",
+        "template-tag-spacing": "error",
+    }
+}
+
+export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
+    return [{
+        languageOptions: {
+            ecmaVersion: "latest",
+            parserOptions: {
+                sourceType: "module",
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
+        },
+        ignores: [
+            '**/node_modules',
+            '**/dist',
+            '**/package-lock.json',
+            '**/yarn.lock',
+            '**/pnpm-lock.yaml',
+            '**/bun.lockb',
+
+            '**/output',
+            '**/coverage',
+            '**/temp',
+            '**/.temp',
+            '**/tmp',
+            '**/.tmp',
+            '**/.history',
+            '**/.vitepress/cache',
+            '**/.nuxt',
+            '**/.next',
+            '**/.vercel',
+            '**/.changeset',
+            '**/.idea',
+            '**/.cache',
+            '**/.output',
+            '**/.vite-inspect',
+            '**/.yarn',
+            '**/vite.config.*.timestamp-*',
+
+            '**/CHANGELOG*.md',
+            '**/*.min.*',
+            '**/LICENSE*',
+            '**/__snapshots__',
+            '**/auto-import?(s).d.ts',
+            '**/components.d.ts',
+        ],
+    }, {
+        files: ["**/*.?([cm])js", "**/*.?([cm])jsx"],
+        rules: Object.assign({}, defaultRules(config?.rules), config?.deprecated ? deprecatedRules(config) : null),
+    }];
+}
