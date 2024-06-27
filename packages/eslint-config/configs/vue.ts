@@ -3,7 +3,8 @@ import pluginVue from "eslint-plugin-vue";
 import VueParser from "vue-eslint-parser";
 import { parser as TsParser } from "typescript-eslint";
 
-export default function defineVueConfig(config?: VueCinfig): FlatESLintConfig[] {
+
+export default function defineVueConfig(config: VueCinfig): FlatESLintConfig[] {
     return [
         ...pluginVue.configs["flat/recommended"],
         {
@@ -35,6 +36,9 @@ export default function defineVueConfig(config?: VueCinfig): FlatESLintConfig[] 
                     },
                 },
             },
+        },
+        {
+            "vue/multi-word-component-names": "off",
         }
     ];
 }

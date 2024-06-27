@@ -1,8 +1,8 @@
-import type { FlatESLintConfig, TsConfig, DeprecatedConfig } from "../types";
+import type { FlatESLintConfig, TsConfig, DeprecatedConfig, BaseRules } from "../types";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 
-function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rules"] {
+function defaultRules(rules?: BaseRules): BaseRules {
     return {
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/ban-types": [
@@ -71,10 +71,10 @@ function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rule
 }
 
 // Deprecated
-function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
+function deprecatedRules(config: DeprecatedConfig): BaseRules {
     return {
         "@typescript-eslint/func-call-spacing": "error",
-        "@typescript-eslint/indent": ["error", config?.indent ?? 4],
+        "@typescript-eslint/indent": ["error", config.indent],
         "@typescript-eslint/key-spacing": ["error", {
             "mode": "strict",
         }],
@@ -94,7 +94,7 @@ function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
     }
 }
 
-export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
+export default function defineTsConfig(config: TsConfig): FlatESLintConfig[] {
     return [
         ...tseslint.configs.recommended as FlatESLintConfig[],
         {
@@ -106,6 +106,11 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
                 },
             },
             rules: Object.assign({}, defaultRules(config?.rules), config?.deprecated ? deprecatedRules(config) : null)
+        },
+        {
+            rules: {
+                "@typescript-eslint/no-explicit-any": "off",
+            }
         }
     ];
 }

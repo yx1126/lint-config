@@ -1,7 +1,7 @@
 {
-    "name": "@yx1126/eslint-config",
+    "name": "front-config",
     "version": "1.0.0",
-    "type": "module",
+    "private": true,
     "description": "yx1126's Eslint config",
     "keywords": [
         "lint",
@@ -28,17 +28,10 @@
         "release": "pnpm -r publish"
     },
     "devDependencies": {
-        "@types/eslint": "^8.56.10",
-        "@types/node": "^20.14.9",
+        "@yx1126/eslint-config": "workspace:*",
         "typescript": "^5.5.2"
     },
     "dependencies": {
-        "@typescript-eslint/parser": "^7.14.1",
-        "eslint": "^9.5.0",
-        "eslint-define-config": "^2.1.0",
-        "eslint-plugin-jsonc": "^2.16.0",
-        "eslint-plugin-vue": "^9.26.0",
-        "eslint-plugin-yml": "^1.14.0",
-        "typescript-eslint": "^7.14.1"
+        "eslint": "^9.5.0"
     }
 }

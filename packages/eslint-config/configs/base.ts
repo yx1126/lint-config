@@ -101,7 +101,7 @@ function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rule
 }
 
 // Deprecated
-function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
+function deprecatedRules(config: DeprecatedConfig): FlatESLintConfig["rules"] {
     return {
         "no-new-symbol": "error",
         "array-bracket-spacing": ["error", "never"],
@@ -117,7 +117,7 @@ function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
         "function-call-argument-newline": ["error", "consistent"],
         "function-paren-newline": "error",
         "implicit-arrow-linebreak": "error",
-        "indent": ["error", config?.indent ?? 4],
+        "indent": ["error", config.indent],
         "jsx-quotes": "error",
         "key-spacing": ["error", {
             "mode": "strict",
@@ -155,7 +155,7 @@ function deprecatedRules(config?: DeprecatedConfig): FlatESLintConfig["rules"] {
     }
 }
 
-export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
+export default function defineBaseConfig(config: BaseConfig): FlatESLintConfig[] {
     return [{
         languageOptions: {
             ecmaVersion: "latest",
@@ -202,6 +202,6 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
         ],
     }, {
         files: ["**/*.?([cm])js", "**/*.?([cm])jsx"],
-        rules: Object.assign({}, defaultRules(config?.rules), config?.deprecated ? deprecatedRules(config) : null),
+        rules: Object.assign({}, defaultRules(config.rules), config.deprecated ? deprecatedRules(config) : null),
     }];
 }

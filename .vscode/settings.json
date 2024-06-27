@@ -1,26 +1,11 @@
 {
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "never"
+        "source.fixAll.eslint": "always"
     },
     "eslint.format.enable": true,
     "eslint.codeAction.showDocumentation": {
         "enable": true
-    },
-    "eslint.options": {
-        "extensions": [
-            ".vue",
-            ".js",
-            ".ts",
-            ".jsx",
-            ".tsx",
-            ".cjs",
-            ".mjs",
-            ".cts",
-            ".mts",
-            ".html",
-            ".html5",
-        ]
     },
     "eslint.validate": [
         "vue",

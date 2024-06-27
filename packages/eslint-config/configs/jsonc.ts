@@ -42,7 +42,7 @@ const packageOrders = [
     "eslintConfig",
 ];
 
-export default function defineJsonConfig(config?: JsonConfig): FlatESLintConfig[] {
+export default function defineJsonConfig(config: JsonConfig): FlatESLintConfig[] {
     const result: FlatESLintConfig[] = [
         ...jsonc.configs["flat/recommended-with-jsonc"],
         {
@@ -55,7 +55,7 @@ export default function defineJsonConfig(config?: JsonConfig): FlatESLintConfig[
                     },
                 ],
                 "jsonc/array-bracket-spacing": ["error", "never"],
-                "jsonc/indent": ["error", config?.indent ?? 4],
+                "jsonc/indent": ["error", config.indent ?? 4],
                 "jsonc/comma-dangle": ["error", "never"],
                 "jsonc/comma-style": ["error", "last"],
                 "jsonc/key-spacing": ["error",
