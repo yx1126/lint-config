@@ -1,6 +1,64 @@
-import type { FlatESLintConfig, BaseConfig, DeprecatedConfig } from "../types";
+import type { FlatESLintConfig, BaseConfig, RulesConfig } from "../types";
+import globals from "globals";
 
-function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rules"] {
+export function defineRules(config?: RulesConfig): FlatESLintConfig["rules"] {
+    const { type = "default", indent } = config || {};
+    if(type === "deprecated") {
+        return {
+            "no-new-symbol": "error",
+            "array-bracket-spacing": ["error", "never"],
+            "arrow-spacing": "error",
+            "block-spacing": "error",
+            "brace-style": ["error", "1tbs", {
+                allowSingleLine: true,
+            }],
+            "comma-spacing": "error",
+            "comma-style": "error",
+            "computed-property-spacing": "error",
+            "func-call-spacing": "error",
+            "function-call-argument-newline": ["error", "consistent"],
+            "function-paren-newline": "error",
+            "implicit-arrow-linebreak": "error",
+            "indent": ["error", indent ?? 4],
+            "jsx-quotes": "error",
+            "key-spacing": ["error", {
+                "mode": "strict",
+            }],
+            "keyword-spacing": ["error", {
+                overrides: {
+                    "if": { "after": false },
+                    "for": { "after": false },
+                    "while": { "after": false },
+                    "switch": { "after": false },
+                },
+            }],
+            "no-multi-spaces": "error",
+            "no-multiple-empty-lines": ["error", {
+                max: 1
+            }],
+            "no-whitespace-before-property": "error",
+            "object-curly-spacing": ["error", "always"],
+            "padded-blocks": ["error", "never"],
+            "quotes": ["error", "double", {
+                allowTemplateLiterals: true,
+                avoidEscape: false
+            }],
+            "rest-spread-spacing": "error",
+            "space-before-blocks": "error",
+            "space-before-function-paren": ["error", {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always",
+            }],
+            "space-in-parens": "error",
+            "switch-colon-spacing": "error",
+            "template-curly-spacing": "error",
+            "template-tag-spacing": "error",
+        }
+    }
+    if(type === "global") {
+        return {}
+    }
     return {
         "array-callback-return": ["error", {
             allowImplicit: true,
@@ -96,69 +154,21 @@ function defaultRules(rules?: FlatESLintConfig["rules"]): FlatESLintConfig["rule
         "no-nonoctal-decimal-escape": "error",
         "no-shadow-restricted-names": "error",
         "no-throw-literal": "error",
-        ...rules
     }
 }
 
-// Deprecated
-function deprecatedRules(config: DeprecatedConfig): FlatESLintConfig["rules"] {
-    return {
-        "no-new-symbol": "error",
-        "array-bracket-spacing": ["error", "never"],
-        "arrow-spacing": "error",
-        "block-spacing": "error",
-        "brace-style": ["error", "1tbs", {
-            allowSingleLine: true,
-        }],
-        "comma-spacing": "error",
-        "comma-style": "error",
-        "computed-property-spacing": "error",
-        "func-call-spacing": "error",
-        "function-call-argument-newline": ["error", "consistent"],
-        "function-paren-newline": "error",
-        "implicit-arrow-linebreak": "error",
-        "indent": ["error", config.indent],
-        "jsx-quotes": "error",
-        "key-spacing": ["error", {
-            "mode": "strict",
-        }],
-        "keyword-spacing": ["error", {
-            overrides: {
-                "if": { "after": false },
-                "for": { "after": false },
-                "while": { "after": false },
-                "switch": { "after": false },
-            },
-        }],
-        "no-multi-spaces": "error",
-        "no-multiple-empty-lines": ["error", {
-            max: 1
-        }],
-        "no-whitespace-before-property": "error",
-        "object-curly-spacing": ["error", "always"],
-        "padded-blocks": ["error", "never"],
-        "quotes": ["error", "double", {
-            allowTemplateLiterals: true,
-            avoidEscape: false
-        }],
-        "rest-spread-spacing": "error",
-        "space-before-blocks": "error",
-        "space-before-function-paren": ["error", {
-            "anonymous": "never",
-            "named": "never",
-            "asyncArrow": "always",
-        }],
-        "space-in-parens": "error",
-        "switch-colon-spacing": "error",
-        "template-curly-spacing": "error",
-        "template-tag-spacing": "error",
-    }
-}
-
-export default function defineBaseConfig(config: BaseConfig): FlatESLintConfig[] {
+export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
+    const { files = [], rules, deprecated, indent } = config || {}
     return [{
+        name: "yx1126/base",
         languageOptions: {
             ecmaVersion: "latest",
+            globals: {
+                ...globals.browser,
+                document: "readonly",
+                navigator: "readonly",
+                window: "readonly",
+            },
             parserOptions: {
                 sourceType: "module",
                 ecmaFeatures: {
@@ -166,42 +176,13 @@ export default function defineBaseConfig(config: BaseConfig): FlatESLintConfig[]
                 },
             },
         },
-        ignores: [
-            '**/node_modules',
-            '**/dist',
-            '**/package-lock.json',
-            '**/yarn.lock',
-            '**/pnpm-lock.yaml',
-            '**/bun.lockb',
-
-            '**/output',
-            '**/coverage',
-            '**/temp',
-            '**/.temp',
-            '**/tmp',
-            '**/.tmp',
-            '**/.history',
-            '**/.vitepress/cache',
-            '**/.nuxt',
-            '**/.next',
-            '**/.vercel',
-            '**/.changeset',
-            '**/.idea',
-            '**/.cache',
-            '**/.output',
-            '**/.vite-inspect',
-            '**/.yarn',
-            '**/vite.config.*.timestamp-*',
-
-            '**/CHANGELOG*.md',
-            '**/*.min.*',
-            '**/LICENSE*',
-            '**/__snapshots__',
-            '**/auto-import?(s).d.ts',
-            '**/components.d.ts',
-        ],
     }, {
-        files: ["**/*.?([cm])js", "**/*.?([cm])jsx"],
-        rules: Object.assign({}, defaultRules(config.rules), config.deprecated ? deprecatedRules(config) : null),
+        name: "yx1126/javascript",
+        files: ["**/*.?([cm])js", "**/*.?([cm])jsx", ...files],
+        rules: {
+            ...defineRules(),
+            ...(deprecated ? defineRules({ type: "deprecated", indent }) : {}),
+            ...rules,
+        },
     }];
 }

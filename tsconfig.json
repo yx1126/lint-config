@@ -11,6 +11,6 @@
         "moduleResolution": "Bundler",
         "esModuleInterop": true,
         "strict": true,
-        "skipLibCheck": true,
+        "skipLibCheck": true
     }
 }

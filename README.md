@@ -8,12 +8,14 @@
 pnpm add -D eslint @yx1126/eslint-config
 ```
 
-### Config `.eslintrc`
+### Config `eslint.config.js`
 
-```json
-{
-    "extends": "@yx1126/eslint-config"
-}
+```javascript
+import { defineEslint } from "@yx1126/eslint-config";
+
+export default defineEslint({
+    // 
+});
 ```
 
 ### Add script for package.json

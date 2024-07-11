@@ -1,9 +1,14 @@
 import { defineEslint } from "@yx1126/eslint-config";
 
 export default defineEslint({
+    deprecated: true,
     jsonc: true,
-    yaml: true,
     package: true,
-    typescript: true,
-    deprecated: true
+    yaml: true,
+    typescript: {
+        parserOptions: {
+            project: true,
+            EXPERIMENTAL_useProjectService: true
+        }
+    }
 });

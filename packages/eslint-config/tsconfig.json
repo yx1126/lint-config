@@ -1,8 +1,9 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "include": [
-       "**/*.ts",
-       "**/*.d.ts"
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "eslint-plugin-vue.d.ts"
     ],
     "exclude": [
         "node_modules",
@@ -15,6 +16,6 @@
         "moduleResolution": "Bundler",
         "esModuleInterop": true,
         "strict": true,
-        "skipLibCheck": true,
+        "skipLibCheck": true
     }
 }

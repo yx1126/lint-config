@@ -1,16 +1,16 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
+    clean: true,
+    dts: true,
+    shims: true,
+    treeshake: true,
+    format: ["esm", "cjs"],
     entry: [
-        'index.ts',
-      ],
-      shims: true,
-      external: [
-        "eslint-define-config",
-        "eslint-plugin-jsonc",
-        "eslint-plugin-vue",
-        "eslint-plugin-yml",
+        "src/index.ts",
+    ],
+    external: [
+        "vue-eslint-parser",
         "typescript-eslint",
-        "@typescript-eslint/parser"
-      ]
+    ],
 })

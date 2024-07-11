@@ -1,8 +1,36 @@
-import type { FlatESLintConfig, TsConfig, DeprecatedConfig, BaseRules } from "../types";
+import type { FlatESLintConfig, TsConfig, Rules, RulesConfig } from "../types";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 
-function defaultRules(rules?: BaseRules): BaseRules {
+export function defaultTsRules(config?: RulesConfig): Rules {
+    const { type, indent } = config || {};
+    if(type === "deprecated") {
+        return {
+            "@typescript-eslint/func-call-spacing": "error",
+            "@typescript-eslint/indent": ["error", indent ?? 4],
+            "@typescript-eslint/key-spacing": ["error", {
+                "mode": "strict",
+            }],
+            "@typescript-eslint/keyword-spacing": ["error", {
+                overrides: {
+                    "if": { "after": false },
+                    "for": { "after": false },
+                    "while": { "after": false },
+                    "switch": { "after": false },
+                },
+            }],
+            "@typescript-eslint/object-curly-spacing": ["error", "always"],
+            "@typescript-eslint/quotes": ["error", "double", {
+                allowTemplateLiterals: true,
+                avoidEscape: false
+            }],
+        }
+    }
+    if(type === "global") {
+        return {
+            "@typescript-eslint/no-explicit-any": "off",
+        }
+    }
     return {
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/ban-types": [
@@ -66,51 +94,36 @@ function defaultRules(rules?: BaseRules): BaseRules {
             "asyncArrow": "always",
         }],
         "@typescript-eslint/no-dynamic-delete": "error",
-        ...rules
+        "@typescript-eslint/no-array-constructor": "error",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/triple-slash-reference": "error",
     }
 }
 
-// Deprecated
-function deprecatedRules(config: DeprecatedConfig): BaseRules {
-    return {
-        "@typescript-eslint/func-call-spacing": "error",
-        "@typescript-eslint/indent": ["error", config.indent],
-        "@typescript-eslint/key-spacing": ["error", {
-            "mode": "strict",
-        }],
-        "@typescript-eslint/keyword-spacing": ["error", {
-            overrides: {
-                "if": { "after": false },
-                "for": { "after": false },
-                "while": { "after": false },
-                "switch": { "after": false },
-            },
-        }],
-        "@typescript-eslint/object-curly-spacing": ["error", "always"],
-        "@typescript-eslint/quotes": ["error", "double", {
-            allowTemplateLiterals: true,
-            avoidEscape: false
-        }],
-    }
-}
-
-export default function defineTsConfig(config: TsConfig): FlatESLintConfig[] {
+export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
+    const { files = [], rules, deprecated, indent } = config || {};
     return [
-        ...tseslint.configs.recommended as FlatESLintConfig[],
+        tseslint.configs.base as FlatESLintConfig,
+        tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
-            files: ["**/*.?([cm])ts", "**/*.?([cm])tsx"],
+            name: "yx1126/typescript",
+            files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             languageOptions: {
                 parserOptions: {
                     tsconfigRootDir: process.cwd(),
+                    project: true,
                     ...(config?.parserOptions as any)
                 },
             },
-            rules: Object.assign({}, defaultRules(config?.rules), config?.deprecated ? deprecatedRules(config) : null)
+            rules: {
+                ...defaultTsRules(),
+                ...(deprecated ? defaultTsRules({ type: "deprecated", indent }) : {}),
+                ...rules,
+            }
         },
         {
-            rules: {
-                "@typescript-eslint/no-explicit-any": "off",
-            }
+            name: "yx1126/typescript/global",
+            rules: defaultTsRules({ type: "global" }),
         }
     ];
 }
