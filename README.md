@@ -8,13 +8,26 @@
 pnpm add -D eslint @yx1126/eslint-config
 ```
 
-### Config `eslint.config.js`
+### Config `eslint.config.mjs`
+
+```javascript
+import yx1126 from "@yx1126/eslint-config";
+import { defineFlatConfig } from "eslint-define-config";
+
+export default defineFlatConfig([
+    ...yx1126.configs["base"],
+]);
+```
+
+#### or
+
+[configs](https://github.com/yx1126/front-config/blob/main/packages/eslint-config/types.d.ts#L40)
 
 ```javascript
 import { defineEslint } from "@yx1126/eslint-config";
 
 export default defineEslint({
-    // 
+    // ...configs
 });
 ```
 
@@ -55,21 +68,6 @@ Add the following settings to your `settings.json`:
 		"yaml",
 		"yml"
     ]
-}
-```
-
-### TypeScript Aware Rules
-
-Type aware rules are enabled when a `tsconfig.eslint.json` is found in the project root, which will introduce some stricter rules into your project. If you want to enable it while have no `tsconfig.eslint.json` in the project root, you can change tsconfig name by modifying `ESLINT_TSCONFIG` env.
-
-```js
-// .eslintrc.js
-const process = require("node:process");
-
-process.env.ESLINT_TSCONFIG = "tsconfig.json";
-
-module.exports = {
-    extends: "@yx1126/eslint-config"
 }
 ```
 
