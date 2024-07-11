@@ -21,7 +21,7 @@ export default defineFlatConfig([
 
 #### or
 
-[configs](https://github.com/yx1126/front-config/blob/main/packages/eslint-config/types.d.ts#L40)
+[configs](https://github.com/yx1126/front-config/blob/main/packages/eslint-config/src/types.d.ts#L45)
 
 ```javascript
 import { defineEslint } from "@yx1126/eslint-config";
