@@ -1,6 +1,6 @@
 import { EslintConfig, FlatESLintConfig } from "./types";
 import defineBaseConfig, { defineRules } from "./configs/base";
-import defineTsConfig, { defaultTsRules } from "./configs/typescript";
+import defineTsConfig, { defineTsRules } from "./configs/typescript";
 import defineVueConfig, { defineVueRules } from "./configs/vue";
 import defineJsonConfig, { defineJsoncRules, defineOrders } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
@@ -27,6 +27,14 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
             ...getConfig(typescript)
         }));
     }
+    // vue
+    const verifyVue = isEnable(vue);
+    if(verifyVue) {
+        result.push(...defineVueConfig({
+            typescript: verifyTs,
+            ...getConfig(typescript),
+        }));
+    }
     // jsonc
     const verifyJson = isEnable(jsonc);
     if(verifyJson) {
@@ -40,14 +48,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     if(verifyYaml) {
         result.push(...defineYamlConfig({
             ...getConfig(yaml)
-        }));
-    }
-    // vue
-    const verifyVue = isEnable(vue);
-    if(verifyVue) {
-        result.push(...defineVueConfig({
-            typescript: verifyTs,
-            ...getConfig(typescript),
         }));
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
@@ -92,7 +92,7 @@ const configs = {
 export {
     defineEslint,
     defineRules,
-    defaultTsRules,
+    defineTsRules,
     defineVueRules,
     defineJsoncRules,
     defineOrders,

@@ -2,7 +2,7 @@ import type { FlatESLintConfig, TsConfig, Rules, RulesConfig } from "../types";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 
-export function defaultTsRules(config?: RulesConfig): Rules {
+export function defineTsRules(config?: RulesConfig): Rules {
     const { type, indent } = config || {};
     if(type === "deprecated") {
         return {
@@ -116,14 +116,14 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
                 },
             },
             rules: {
-                ...defaultTsRules(),
-                ...(deprecated ? defaultTsRules({ type: "deprecated", indent }) : {}),
+                ...defineTsRules(),
+                ...(deprecated ? defineTsRules({ type: "deprecated", indent }) : {}),
                 ...rules,
             }
         },
         {
             name: "yx1126/typescript/global",
-            rules: defaultTsRules({ type: "global" }),
+            rules: defineTsRules({ type: "global" }),
         }
     ];
 }

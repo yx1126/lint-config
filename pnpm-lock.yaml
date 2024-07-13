@@ -48,9 +48,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.14.1
         version: 7.14.1(eslint@9.5.0)(typescript@5.5.2)
-      eslint:
-        specifier: ^9.5.0
-        version: 9.5.0
       eslint-define-config:
         specifier: ^2.1.0
         version: 2.1.0
@@ -73,6 +70,9 @@ importers:
       '@types/eslint':
         specifier: ^8.56.10
         version: 8.56.10
+      eslint:
+        specifier: ^9.5.0
+        version: 9.5.0
       typescript:
         specifier: ^5.5.2
         version: 5.5.2

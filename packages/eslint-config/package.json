@@ -1,6 +1,6 @@
 {
     "name": "@yx1126/eslint-config",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "yx1126's Eslint config",
     "type": "module",
     "keywords": [
@@ -37,7 +37,6 @@
     },
     "dependencies": {
         "@typescript-eslint/parser": "^7.14.1",
-        "eslint": "^9.5.0",
         "eslint-define-config": "^2.1.0",
         "eslint-plugin-jsonc": "^2.16.0",
         "eslint-plugin-vue": "^9.26.0",
@@ -47,6 +46,7 @@
     },
     "devDependencies": {
         "@types/eslint": "^8.56.10",
+        "eslint": "^9.5.0",
         "typescript": "^5.5.2"
     }
 }
