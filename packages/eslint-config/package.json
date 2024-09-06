@@ -29,11 +29,7 @@
         "url": "https://github.com/yx1126/front-config/issues"
     },
     "scripts": {
-        "build": "tsup",
-        "build:rollup": "rollup -c"
-    },
-    "peerDependencies": {
-        "eslint": ">=8.40.0"
+        "build": "rollup -c"
     },
     "dependencies": {
         "@typescript-eslint/parser": "^7.14.1",
@@ -45,8 +41,6 @@
         "typescript-eslint": "^7.14.1"
     },
     "devDependencies": {
-        "@types/eslint": "^8.56.10",
-        "eslint": "^9.5.0",
-        "typescript": "^5.5.2"
+        "@types/eslint": "^8.56.10"
     }
 }

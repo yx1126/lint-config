@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 import resolve from "@rollup/plugin-node-resolve";
@@ -9,6 +10,7 @@ const input = "./src/index.ts";
 
 const external = [
     "vue-eslint-parser",
+    "@typescript-eslint/parser",
     "typescript-eslint",
     "eslint-define-config",
     "eslint-plugin-jsonc",
@@ -16,7 +18,6 @@ const external = [
     "eslint-plugin-yml",
     "eslint",
     "globals",
-    "@typescript-eslint/parser"
 ]
 
 export default defineConfig([{
@@ -24,9 +25,9 @@ export default defineConfig([{
     output: [{
         file: "./dist/index.cjs",
         format: "cjs",
-        exports: "named"
+        exports: "named",
     }, {
-        file: "./dist/index.mjs",
+        file: "./dist/index.js",
         format: "esm",
         exports: "named"
     }],

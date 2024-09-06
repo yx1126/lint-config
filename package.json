@@ -26,7 +26,7 @@
         "lint:fix": "eslint . --fix",
         "build:eslint": "pnpm run -C packages/eslint-config build",
         "inspector": "npx @eslint/config-inspector@latest",
-        "release": "pnpm -r publish"
+        "release": "pnpm build:eslint && pnpm -r publish"
     },
     "dependencies": {
         "eslint": "^9.5.0"
