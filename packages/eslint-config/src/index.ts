@@ -47,7 +47,7 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     if(verifyVue) {
         result.push(...defineVueConfig({
             typescript: verifyTs,
-            ...getConfig(typescript),
+            ...getConfig(vue),
         }));
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
