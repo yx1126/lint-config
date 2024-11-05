@@ -34,7 +34,7 @@ export function defineVueRules(config?: RulesConfig): Rules {
         "vue/html-indent": ["error", indent ?? 4],
         "vue/script-indent": ["error", indent ?? 4, {
             baseIndent: 0,
-            switchCase: 1,
+            switchCase: 0,
         }],
         "vue/html-quotes": ["error", "double", { "avoidEscape": true }],
         "vue/max-attributes-per-line": ["error", {

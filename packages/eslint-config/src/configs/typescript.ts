@@ -112,6 +112,7 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
                 parserOptions: {
                     tsconfigRootDir: process.cwd(),
                     project: true,
+                    EXPERIMENTAL_useProjectService: true,
                     ...(config?.parserOptions as any)
                 },
             },

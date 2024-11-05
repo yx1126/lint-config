@@ -11,16 +11,25 @@ export type { EslintConfig } from "./types";
 
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
     const { jsonc, package: pkg, yaml, typescript, vue } = config || {};
+    const verifyVue = isEnable(vue);
+    const verifyTs = isEnable(typescript);
+    const verifyJson = isEnable(jsonc);
+    const verifyYaml = isEnable(yaml);
+
     // javascript
+    const files = [...(config?.base?.files || [])];
+    if(verifyVue) {
+        files.push("**/*.vue");
+    }
     const result: FlatESLintConfig[] = [
         ...defineBaseConfig({
             deprecated: config?.deprecated,
             ...config?.base,
+            files,
         }),
         ...defineIgnores(),
     ];
     // typescript
-    const verifyTs = isEnable(typescript);
     if(verifyTs) {
         result.push(...defineTsConfig({
             deprecated: config?.deprecated,
@@ -28,7 +37,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         }));
     }
     // vue
-    const verifyVue = isEnable(vue);
     if(verifyVue) {
         result.push(...defineVueConfig({
             typescript: verifyTs,
@@ -36,7 +44,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         }));
     }
     // jsonc
-    const verifyJson = isEnable(jsonc);
     if(verifyJson) {
         result.push(...defineJsonConfig({
             ...getConfig(jsonc),
@@ -44,7 +51,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         }));
     }
     // yaml
-    const verifyYaml = isEnable(yaml);
     if(verifyYaml) {
         result.push(...defineYamlConfig({
             ...getConfig(yaml)
@@ -60,29 +66,19 @@ const config: EslintConfig = {
     package: true,
     yaml: true,
     vue: true,
-    typescript: {
-        parserOptions: {
-            EXPERIMENTAL_useProjectService: true
-        }
-    },
+    typescript: true,
 }
 
 const configs = {
     base: defineEslint(config),
-    v2: defineEslint({
+    baseV2: defineEslint({
         ...config,
-        vue: {
-            v2: true
-        }
+        vue: { v2: true }
     }),
     js: defineBaseConfig(),
     ts: [
         ...defineBaseConfig(),
-        ...defineTsConfig({
-            parserOptions: {
-                EXPERIMENTAL_useProjectService: true
-            }
-        }),
+        ...defineTsConfig(),
     ],
     ignores: defineIgnores(),
     jsonc: defineJsonConfig(),
