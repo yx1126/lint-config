@@ -19,7 +19,9 @@ export function defineRules(config?: RulesConfig): FlatESLintConfig["rules"] {
             "function-call-argument-newline": ["error", "consistent"],
             "function-paren-newline": "error",
             "implicit-arrow-linebreak": "error",
-            "indent": ["error", indent ?? 4],
+            "indent": ["error", indent ?? 4, {
+                "SwitchCase": 0,
+            }],
             "jsx-quotes": "error",
             "key-spacing": ["error", {
                 "mode": "strict",
@@ -62,7 +64,7 @@ export function defineRules(config?: RulesConfig): FlatESLintConfig["rules"] {
     return {
         "array-callback-return": ["error", {
             allowImplicit: true,
-            checkForEach: true
+            checkForEach: false
         }],
         "constructor-super": "error",
         "for-direction": "error",
@@ -129,11 +131,13 @@ export function defineRules(config?: RulesConfig): FlatESLintConfig["rules"] {
         "use-isnan": "error",
         "valid-typeof": "error",
         "no-unused-private-class-members": "error",
+        "semi-spacing": "error",
+        "space-unary-ops": "error",
 
         // Suggestions
         "block-scoped-var": "error",
         "no-alert": "error",
-        "no-console": "error",
+        "no-console": ["error", { allow: ["warn", "error"] }],
         "no-delete-var": "error",
         "no-else-return": ["error", {
             allowElseIf: false,
@@ -148,7 +152,7 @@ export function defineRules(config?: RulesConfig): FlatESLintConfig["rules"] {
         "no-unused-labels": "error",
         "no-var": "error",
         "no-with": "error",
-        "prefer-const": "error",
+        "prefer-const": ["error", { destructuring: "all" }],
         "func-name-matching": "error",
         "no-extra-boolean-cast": "error",
         "no-nonoctal-decimal-escape": "error",

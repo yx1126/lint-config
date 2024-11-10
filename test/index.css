@@ -1,0 +1,49 @@
+/* 测试 stylelint 规则 */
+
+body {
+    color: red;
+    background-color: #000;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* 下面有一些潜在的错误和风格问题 */
+div {
+    margin: 10px;
+    padding: 5px;
+    background-color: blue;
+    border: 1px solid green;
+    font-size: 14px;
+}
+
+/* 错误用法：不推荐使用 ID 选择器 */
+#main-header {
+    font-size: 24px;
+}
+
+/* 错误用法：使用 !important */
+button {
+    color: white !important;
+    background-color: blue !important;
+}
+
+/* 不符合 BEM 命名规范 */
+.navbar__link {
+    color: #333;
+}
+
+.container .header {
+    margin-top: 20px;
+}
+
+/* 测试无效的 CSS 属性 */
+.foo {
+    display: flexbox;
+}

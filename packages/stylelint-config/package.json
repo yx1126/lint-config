@@ -1,12 +1,12 @@
 {
-    "name": "@yx1126/eslint-config",
-    "version": "1.0.3",
-    "description": "yx1126's Eslint config",
+    "name": "@yx1126/stylelint-config",
+    "version": "0.0.1",
+    "description": "yx1126's Stylelint config",
     "type": "module",
     "keywords": [
         "lint",
-        "eslint",
-        "eslint-config"
+        "stylelint",
+        "stylelint-config"
     ],
     "license": "MIT",
     "author": "yx1126",
@@ -32,15 +32,9 @@
         "build": "rollup -c"
     },
     "dependencies": {
-        "@typescript-eslint/parser": "^7.14.1",
-        "eslint-define-config": "^2.1.0",
-        "eslint-plugin-jsonc": "^2.16.0",
-        "eslint-plugin-vue": "^9.26.0",
-        "eslint-plugin-yml": "^1.14.0",
-        "globals": "^15.8.0",
-        "typescript-eslint": "^7.14.1"
+        "stylelint-config-standard": "^36.0.1"
     },
     "devDependencies": {
-        "@types/eslint": "^8.56.10"
+        "stylelint": "^16.10.0"
     }
 }

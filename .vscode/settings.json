@@ -20,6 +20,13 @@
         "yaml",
         "yml"
     ],
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "css",
+        "scss",
+        "sass",
+        "vue"
+    ],
     "editor.cursorSmoothCaretAnimation": "on",
     "[typescript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
