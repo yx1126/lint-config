@@ -4,6 +4,10 @@
         "node_modules",
         "dist"
     ],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts"
+    ],
     "compilerOptions": {
         "baseUrl": ".",
         "target": "ESNext",

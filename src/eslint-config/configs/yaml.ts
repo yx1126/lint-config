@@ -1,5 +1,5 @@
-import type { FlatESLintConfig, YamlConfig, Rules, RulesConfig } from "../types";
-import { getFlatRules } from "../utils";
+import type { FlatESLintConfig, YamlConfig, Rules, RulesConfig } from "../eslint";
+import { getFlatRules } from "../../utils";
 import yml from "eslint-plugin-yml";
 
 export function defineYamlRules(config?: RulesConfig): Rules {

@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, RulesConfig, VueCinfig, Rules } from "../types";
+import type { FlatESLintConfig, RulesConfig, VueCinfig, Rules } from "../eslint";
 import pluginVue from "eslint-plugin-vue";
 import VueParser from "vue-eslint-parser";
 import { parser as TsParser } from "typescript-eslint";

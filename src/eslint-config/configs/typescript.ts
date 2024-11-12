@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, TsConfig, Rules, RulesConfig } from "../types";
+import type { FlatESLintConfig, TsConfig, Rules, RulesConfig } from "../eslint";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 

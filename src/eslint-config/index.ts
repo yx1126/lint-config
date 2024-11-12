@@ -1,13 +1,11 @@
-import { EslintConfig, FlatESLintConfig } from "./types";
+import { EslintConfig, FlatESLintConfig } from "./eslint";
 import defineBaseConfig, { defineRules } from "./configs/base";
 import defineTsConfig, { defineTsRules } from "./configs/typescript";
 import defineVueConfig, { defineVueRules } from "./configs/vue";
 import defineJsonConfig, { defineJsoncRules, defineOrders } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
-import { isEnable, getConfig } from "./utils";
-
-export type { EslintConfig } from "./types";
+import { isEnable, getConfig } from "../utils";
 
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
     const { jsonc, package: pkg, yaml, typescript, vue } = config || {};
@@ -31,9 +29,15 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     ];
     // typescript
     if(verifyTs) {
+        const tsConfig = getConfig(typescript);
+        const tsFiles = [...(tsConfig?.files || [])];
+        if(verifyVue) {
+            tsFiles.push("**/*.vue");
+        }
         result.push(...defineTsConfig({
             deprecated: config?.deprecated,
-            ...getConfig(typescript)
+            ...tsConfig,
+            files: tsFiles,
         }));
     }
     // vue
@@ -60,19 +64,9 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     return result;
 }
 
-const config: EslintConfig = {
-    deprecated: true,
-    jsonc: true,
-    package: true,
-    yaml: true,
-    vue: true,
-    typescript: true,
-}
-
 const configs = {
-    base: defineEslint(config),
+    base: defineEslint(),
     baseV2: defineEslint({
-        ...config,
         vue: { v2: true }
     }),
     js: defineBaseConfig(),

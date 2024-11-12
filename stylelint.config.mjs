@@ -1,3 +1,3 @@
-import { defineStyleLint } from "@yx1126/stylelint-config";
+import { defineStyleLint } from "./dist";
 
 export default defineStyleLint();

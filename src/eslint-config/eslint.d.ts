@@ -1,6 +1,8 @@
 import type { FlatESLintConfig as BaseFlatESLintConfig } from "eslint-define-config";
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
+import type { Enable } from "../types";
+
 
 export interface DeprecatedConfig {
     indent?: "tab" | number;
@@ -36,10 +38,6 @@ export interface VueCinfig extends Omit<BaseConfig, "deprecated"> {
     v2?: boolean;
     typescript?: boolean;
     rules?: Rules;
-}
-
-export type Enable<T extends object> = T & {
-    enable?: boolean;
 }
 
 export interface EslintConfig {

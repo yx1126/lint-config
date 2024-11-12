@@ -1,6 +1,6 @@
 import jsonc from "eslint-plugin-jsonc";
-import { getFlatRules } from "../utils";
-import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../types";
+import { getFlatRules } from "../../utils";
+import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../eslint";
 
 export function defineOrders() {
     return [

@@ -9,6 +9,7 @@ import dts from "rollup-plugin-dts";
 const input = "./src/index.ts";
 
 const external = [
+    // eslint
     "vue-eslint-parser",
     "@typescript-eslint/parser",
     "typescript-eslint",
@@ -18,6 +19,9 @@ const external = [
     "eslint-plugin-yml",
     "eslint",
     "globals",
+    // stylelint
+    "postcss-scss",
+    "stylelint-scss"
 ]
 
 export default defineConfig([{
