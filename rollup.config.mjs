@@ -19,6 +19,7 @@ const external = [
     "eslint-plugin-yml",
     "eslint",
     "globals",
+    "@stylistic/eslint-plugin",
     // stylelint
     "postcss-scss",
     "stylelint-scss"

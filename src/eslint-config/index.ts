@@ -6,13 +6,15 @@ import defineJsonConfig, { defineJsoncRules, defineOrders } from "./configs/json
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
 import { isEnable, getConfig } from "../utils";
+import stylistic from "@stylistic/eslint-plugin";
 
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
-    const { jsonc, package: pkg, yaml, typescript, vue } = config || {};
+    const { jsonc, package: pkg, yaml, typescript, vue, stylistic: style } = config || {};
     const verifyVue = isEnable(vue);
     const verifyTs = isEnable(typescript);
     const verifyJson = isEnable(jsonc);
     const verifyYaml = isEnable(yaml);
+    const verifyStyle = isEnable(style);
 
     // javascript
     const files = [...(config?.base?.files || [])];
@@ -21,7 +23,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     }
     const result: FlatESLintConfig[] = [
         ...defineBaseConfig({
-            deprecated: config?.deprecated,
             ...config?.base,
             files,
         }),
@@ -35,7 +36,6 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
             tsFiles.push("**/*.vue");
         }
         result.push(...defineTsConfig({
-            deprecated: config?.deprecated,
             ...tsConfig,
             files: tsFiles,
         }));
@@ -59,6 +59,16 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         result.push(...defineYamlConfig({
             ...getConfig(yaml)
         }));
+    }
+    // stylistic
+    if(verifyStyle) {
+        result.push(stylistic.configs.customize(Object.assign({
+            indent: 4,
+            quotes: "double",
+            quoteProps: "consistent-as-needed",
+            semi: false,
+            jsx: true,
+        }, getConfig(style))) as any);
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
     return result;

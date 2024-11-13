@@ -46,8 +46,7 @@ export function defineOrders() {
 }
 
 export function defineJsoncRules(config?: RulesConfig): Rules {
-    const { type, indent } = config || {};
-    if(type === "deprecated" || type === "global") return {};
+    const { indent } = config || {};
     return {
         ...getFlatRules(jsonc.configs["flat/recommended-with-jsonc"]),
         "jsonc/array-bracket-newline": ["error",

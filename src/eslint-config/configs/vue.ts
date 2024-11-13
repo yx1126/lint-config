@@ -22,9 +22,6 @@ const globals: Record<string, "readonly" | "writable" | false | "readable" | tru
 
 export function defineVueRules(config?: RulesConfig): Rules {
     const { type, indent } = config || {};
-    if(type === "deprecated") {
-        return {}
-    }
     if( type === "global") {
         return {
             "vue/multi-word-component-names": "off",

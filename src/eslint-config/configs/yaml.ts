@@ -3,8 +3,7 @@ import { getFlatRules } from "../../utils";
 import yml from "eslint-plugin-yml";
 
 export function defineYamlRules(config?: RulesConfig): Rules {
-    const { type, indent } = config || {};
-    if(type === "deprecated" || type === "global") return {};
+    const { indent } = config || {};
     return {
         ...getFlatRules(yml.configs["flat/standard"]),
         "spaced-comment": "off",
