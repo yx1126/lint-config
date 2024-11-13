@@ -1,35 +1,23 @@
-# @yx1126/eslint-config
-
-## Usage
+# @reallyx/front-config
 
 ### Install
 
 ```bash
-pnpm add -D eslint @yx1126/eslint-config
+pnpm add @reallyx/front-config -D
 ```
+
+## Eslint Usage
 
 ### Config `eslint.config.mjs`
 
 ```javascript
-import yx1126 from "@yx1126/eslint-config";
-import { defineFlatConfig } from "eslint-define-config";
-
-export default defineFlatConfig([
-    ...yx1126.configs["base"],
-]);
-```
-
-#### or
-
-[configs](https://github.com/yx1126/front-config/blob/main/packages/eslint-config/src/types.d.ts#L45)
-
-```javascript
-import { defineEslint } from "@yx1126/eslint-config";
+import { defineEslint } from "@reallyx/front-config";
 
 export default defineEslint({
     // ...configs
 });
 ```
+EslintConfig see [configs](https://github.com/yx1126/front-config/blob/main/src/eslint-config/eslint.d.ts#L43)
 
 ### Add script for package.json
 
@@ -40,6 +28,31 @@ For example:
     "scripts": {
         "lint": "eslint .",
         "lint:fix": "eslint . --fix"
+    }
+}
+```
+## Stylelint Usage
+
+### Config `stylelint.config.mjs`
+
+```javascript
+import { defineStyleLint } from "@reallyx/front-config";
+
+export default defineStyleLint({
+    // ...configs
+});
+```
+StylelintConfig see [configs](https://github.com/yx1126/front-config/blob/main/src/stylelint-config/stylelint.d.ts#L15)
+
+### Add script for package.json
+
+For example:
+
+```json
+{
+    "scripts": {
+        "stylelint": "stylelint \"**/*.{css,scss}\"",
+        "stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix",
     }
 }
 ```
@@ -56,6 +69,9 @@ Add the following settings to your `settings.json`:
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": false,
     },
+    // eslint
+    "eslint.format.enable": true,
+    "eslint.useFlatConfig": true,
     "eslint.validate": [
         "vue",
 		"javascript",
@@ -67,7 +83,15 @@ Add the following settings to your `settings.json`:
 		"json5",
 		"yaml",
 		"yml"
-    ]
+    ],
+    // stylelint
+    "stylelint.enable": true,
+    "stylelint.validate": [
+        "css",
+        "scss",
+        "sass",
+        "vue"
+    ],
 }
 ```
 
