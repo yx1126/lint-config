@@ -1,6 +1,7 @@
 import type { FlatESLintConfig, TsConfig, Rules, RulesConfig } from "../eslint";
 import tseslint from "typescript-eslint";
 import process from "node:process";
+import type { ParserOptions } from "@typescript-eslint/parser";
 
 export function defineTsRules(config?: RulesConfig): Rules {
     const { type, indent } = config || {};
@@ -100,7 +101,7 @@ export function defineTsRules(config?: RulesConfig): Rules {
     }
 }
 
-export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
+export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[]   {
     const { files = [], rules, deprecated, indent } = config || {};
     return [
         tseslint.configs.base as FlatESLintConfig,
@@ -110,11 +111,15 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
             files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             languageOptions: {
                 parserOptions: {
+                    extraFileExtensions: [".vue"],
+                    sourceType: "module",
                     tsconfigRootDir: process.cwd(),
                     project: true,
-                    EXPERIMENTAL_useProjectService: true,
-                    ...(config?.parserOptions as any)
-                },
+                    projectService: {
+                        allowDefaultProject: ["*.js"],
+                    },
+                    ...(config?.parserOptions as any),
+                } as ParserOptions as any,
             },
             rules: {
                 ...defineTsRules(),
