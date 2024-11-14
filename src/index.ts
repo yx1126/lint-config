@@ -5,7 +5,7 @@ export type {
     JsonConfig,
     YamlConfig,
     TsConfig,
-    VueCinfig,
+    VueConfig,
     RulesConfig,
     EslintConfig,
 } from "./eslint-config/eslint";
@@ -19,6 +19,7 @@ export {
     defineOrders,
     defineYamlRules,
     defineIgnoresRules,
+    defineStylistic
 } from "./eslint-config/index";
 
 // stylelint
