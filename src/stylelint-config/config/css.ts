@@ -1,5 +1,6 @@
 import type { Config } from "stylelint";
 import { BaseConfig } from "../stylelint";
+import { flatFiles, getFiles } from "../../utils";
 
 export function defineCssRules(): Config["rules"] {
     return {
@@ -92,7 +93,7 @@ export function defineCssRules(): Config["rules"] {
 
 export default function defineCssConfig(config?: BaseConfig): Required<Config>["overrides"] {
     return [{
-        files: ["*.css", "**/*.css", ...(config?.files || [])],
+        files: [...flatFiles(["css"]), ...getFiles(config?.files)],
         rules: {
             ...defineCssRules(),
             ...config?.rules,

@@ -1,4 +1,5 @@
 import { FlatESLintConfig } from "./eslint-config/eslint";
+import type { Enable } from "./types";
 
 export const isBol = (v: unknown): v is boolean => typeof v === "boolean";
 
@@ -14,12 +15,20 @@ export function getFlatRules(flats: FlatESLintConfig[]) {
     }, {})
 }
 
-export function isEnable(config?: boolean | { enable?: boolean }) {
+export function isEnable<T extends object>(config?: boolean | Enable<T>) {
     if(isBol(config)) return config;
-    if(isObj(config)) return config?.enable ?? true;
+    if(isObj<T>(config)) return config?.enable ?? true;
     return true;
 }
 
 export function getConfig<T extends object>(config?: boolean | T): T {
     return (isBol(config) ? {} : config) as T;
+}
+
+export function getFiles(files?: string | string[]) {
+    return isArray(files) ? files : isStr(files) ? [files] : [];
+}
+
+export function flatFiles(files: string[]) {
+    return files.flatMap(f => [`*.${f}`, `**/*.${f}`]);
 }

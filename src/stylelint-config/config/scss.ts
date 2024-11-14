@@ -2,6 +2,7 @@ import postcssScss from "postcss-scss";
 import stylelintScss from "stylelint-scss";
 import type { Config } from "stylelint";
 import { BaseConfig } from "../stylelint";
+import { flatFiles, getFiles } from "../../utils";
 
 export function defineScssRules(): Config["rules"] {
     return {
@@ -95,7 +96,7 @@ export function defineScssRules(): Config["rules"] {
 
 export default function defineScssConfig(config?: BaseConfig): Required<Config>["overrides"] {
     return [{
-        files: ["*.scss", "**/*.scss", ...(config?.files || [])],
+        files: [...flatFiles(["scss"]), ...getFiles(config?.files)],
         customSyntax: postcssScss,
         plugins: [stylelintScss],
         rules: {

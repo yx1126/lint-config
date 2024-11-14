@@ -1,10 +1,10 @@
 import type { Config } from "stylelint";
 import type { Enable } from "../types";
 
-export type ConfigOverride = Config["overrides"];
+export type ConfigOverride = Required<Config>["overrides"];
 
 export interface BaseConfig {
-    files?: string | string[];
+    files?: ConfigOverride[number]["files"];
     rules?: Config["rules"];
 }
 
