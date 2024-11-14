@@ -5,9 +5,11 @@ import defineVueConfig, { defineVueRules } from "./configs/vue";
 import defineJsonConfig, { defineJsoncRules, defineOrders } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
+import defineStylistic from "./configs/stylistic";
 import { isEnable, getConfig } from "../utils";
-import stylistic from "@stylistic/eslint-plugin";
 
+function defineEslint(config?: EslintConfig): FlatESLintConfig[];
+function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
     const { jsonc, package: pkg, yaml, typescript, vue, stylistic: style } = config || {};
     const verifyVue = isEnable(vue);
@@ -15,6 +17,9 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     const verifyJson = isEnable(jsonc);
     const verifyYaml = isEnable(yaml);
     const verifyStyle = isEnable(style);
+
+    // stylistic options
+    const styleConfig = getConfig(style);
 
     // javascript
     const files = [...(config?.base?.files || [])];
@@ -44,12 +49,14 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     if(verifyVue) {
         result.push(...defineVueConfig({
             typescript: verifyTs,
+            indent: styleConfig.indent,
             ...getConfig(vue),
         }));
     }
     // jsonc
     if(verifyJson) {
         result.push(...defineJsonConfig({
+            indent: styleConfig.indent,
             ...getConfig(jsonc),
             package: pkg,
         }));
@@ -57,18 +64,13 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     // yaml
     if(verifyYaml) {
         result.push(...defineYamlConfig({
+            indent: styleConfig.indent,
             ...getConfig(yaml)
         }));
     }
     // stylistic
     if(verifyStyle) {
-        result.push(stylistic.configs.customize(Object.assign({
-            indent: 4,
-            quotes: "double",
-            quoteProps: "consistent-as-needed",
-            semi: false,
-            jsx: true,
-        }, getConfig(style))) as any);
+        result.push(defineStylistic(styleConfig) as any);
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
     return result;
@@ -98,6 +100,7 @@ export {
     defineOrders,
     defineYamlRules,
     defineIgnoresRules,
+    defineStylistic,
 }
 
 export default {

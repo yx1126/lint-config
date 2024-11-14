@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, RulesConfig, VueCinfig, Rules } from "../eslint";
+import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../eslint";
 import pluginVue from "eslint-plugin-vue";
 import VueParser from "vue-eslint-parser";
 import { parser as TsParser } from "typescript-eslint";
@@ -67,7 +67,7 @@ export function defineVueRules(config?: RulesConfig): Rules {
     }
 }
 
-export default function defineVueConfig(config?: VueCinfig): FlatESLintConfig[] {
+export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] {
     const { files = [], v2, typescript, indent, rules } = config || {};
     return [
         ...pluginVue.configs[v2 ? "flat/vue2-recommended" :"flat/recommended"],
