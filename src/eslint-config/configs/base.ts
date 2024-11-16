@@ -103,7 +103,6 @@ export function defineRules(): FlatESLintConfig["rules"] {
 }
 
 export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
-    const { files = [], rules } = config || {}
     return [{
         name: "reallyx/base",
         languageOptions: {
@@ -124,10 +123,10 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
         },
     }, {
         name: "reallyx/javascript",
-        files,
+        ...config,
         rules: {
             ...defineRules(),
-            ...rules,
+            ...config?.rules,
         },
     }];
 }
