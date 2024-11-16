@@ -25,7 +25,7 @@ export function getFlatRules(flats: FlatESLintConfig[]) {
 export function isEnable<T extends object>(config?: IsEnable<T>, defaultValue = true): boolean {
     if(isBol(config)) return config
     if(isObj<T>(config)) return config?.enable ?? defaultValue
-    return true
+    return defaultValue
 }
 
 /**
