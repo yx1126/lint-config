@@ -1,3 +1,3 @@
-export type Enable<T extends object> = T & {
+export type IsEnable<T extends object> = boolean | (T & {
     enable?: boolean;
-}
+})

@@ -2,6 +2,8 @@ import type { FlatESLintConfig, TsConfig, Rules } from "../eslint";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 import type { ParserOptions } from "@typescript-eslint/parser";
+import { parser as TsParser } from "typescript-eslint";
+import pluginTs from "@typescript-eslint/eslint-plugin";
 
 export function defineTsRules(): Rules {
     return {
@@ -56,22 +58,27 @@ export function defineTsRules(): Rules {
 export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[]   {
     const { files = [], rules } = config || {};
     return [
-        tseslint.configs.base as FlatESLintConfig,
         tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
-            name: "yx1126/typescript",
+            name: "reallyx/typescript",
             files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             languageOptions: {
+                parser: TsParser,
                 parserOptions: {
                     extraFileExtensions: [".vue"],
                     sourceType: "module",
                     tsconfigRootDir: process.cwd(),
-                    project: true,
                     projectService: {
                         allowDefaultProject: ["*.js"],
                     },
+                    ecmaFeatures: {
+                        jsx: true,
+                    },
                     ...(config?.parserOptions as any),
                 } as ParserOptions as any,
+            },
+            plugins: {
+                "@typescript-eslint": pluginTs as any
             },
             rules: {
                 ...defineTsRules(),

@@ -1,5 +1,5 @@
 import type { Config } from "stylelint";
-import { BaseConfig } from "../stylelint";
+import type { BaseConfig } from "../stylelint";
 import { flatFiles, getFiles } from "../../utils";
 
 export function defineCssRules(): Config["rules"] {

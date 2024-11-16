@@ -1,5 +1,5 @@
 import type { Config } from "stylelint";
-import type { Enable } from "../types";
+import type { IsEnable } from "../types";
 
 export type ConfigOverride = Required<Config>["overrides"];
 
@@ -13,6 +13,6 @@ export interface CssConfig extends BaseConfig { }
 export interface ScssConfig extends BaseConfig { }
 
 export interface StylelintConfig extends Config {
-    css?: Enable<CssConfig> | boolean;
-    scss?: Enable<ScssConfig> | boolean;
+    css?: IsEnable<CssConfig>;
+    scss?: IsEnable<ScssConfig>;
 }

@@ -3,20 +3,20 @@ import { getFlatRules } from "../../utils";
 import yml from "eslint-plugin-yml";
 
 export function defineYamlRules(config?: RulesConfig): Rules {
-    const { indent } = config || {};
+    const { indent = 2 } = config || {};
     return {
         ...getFlatRules(yml.configs["flat/standard"]),
         "spaced-comment": "off",
-        "yml/indent": ["error", indent ?? 2],
+        "yml/indent": ["error", indent],
     }
 }
 
 export default function defineYamlConfig(config?: YamlConfig): FlatESLintConfig[] {
-    const { files = [], indent, rules } = config || {};
+    const { files = [], indent = 2, rules } = config || {};
     return [
         ...yml.configs["flat/base"],
         {
-            name: "yx1126/yaml",
+            name: "reallyx/yaml",
             files: ["**/*.y?(a)ml", ...files],
             rules: {
                 ...defineYamlRules({ indent }),

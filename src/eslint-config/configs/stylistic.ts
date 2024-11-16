@@ -23,7 +23,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         indent = 4,
         jsx = true,
         pluginName = "@stylistic",
-        quoteProps = "consistent-as-needed",
+        quoteProps = "as-needed",
         quotes = "double",
         semi = false,
     } = options
@@ -66,10 +66,9 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         "@stylistic/switch-colon-spacing": "error",
         "@stylistic/template-curly-spacing": "error",
         "@stylistic/template-tag-spacing": "error",
-        "@stylistic/arrow-parens": ["error", arrowParens ? "always" : "as-needed", { requireForBlockBody: true }],
+        "@stylistic/arrow-parens": ["error", arrowParens ? "always" : "as-needed", { requireForBlockBody: false }],
         "@stylistic/comma-dangle": ["error", commaDangle],
         "@stylistic/dot-location": ["error", "property"],
-        "@stylistic/eol-last": "error",
         "@stylistic/indent-binary-ops": ["error", indent],
         "@stylistic/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
         "@stylistic/member-delimiter-style": ["error", {
@@ -119,6 +118,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         "@stylistic/type-named-tuple-spacing": "error",
         "@stylistic/wrap-iife": ["error", "any", { functionPrototypeMethods: true }],
         "@stylistic/yield-star-spacing": ["error", "before"],
+        "@stylistic/eol-last": ["error", "never"],
 
         ...jsx
             ? {
@@ -176,6 +176,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
 
     if(flat) {
         return {
+            name: "reallyx/style",
             plugins: {
                 [pluginName]: { ...plugin, configs: undefined },
             },
@@ -186,6 +187,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
             throw new Error("PluginName in non-flat config can not be customized")
 
         return {
+            ...{ name: "reallyx/style" },
             plugins: ["@stylistic"],
             rules,
         } satisfies Linter.BaseConfig

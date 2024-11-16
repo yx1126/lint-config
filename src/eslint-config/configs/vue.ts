@@ -2,6 +2,9 @@ import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../eslint"
 import pluginVue from "eslint-plugin-vue";
 import VueParser from "vue-eslint-parser";
 import { parser as TsParser } from "typescript-eslint";
+import { mergeProcessors } from "eslint-merge-processors"
+import processorVueBlocks from "eslint-processor-vue-blocks";
+import { getConfig, isEnable } from "../../utils";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
     computed: "readonly",
@@ -21,28 +24,15 @@ const globals: Record<string, "readonly" | "writable" | false | "readable" | tru
 }
 
 export function defineVueRules(config?: RulesConfig): Rules {
-    const { type, indent } = config || {};
-    if( type === "global") {
-        return {
-            "vue/multi-word-component-names": "off",
-        }
-    }
+    const { indent = 4 } = config || {};
     return {
-        "vue/html-indent": ["error", indent ?? 4],
-        "vue/script-indent": ["error", indent ?? 4, {
+        "vue/html-indent": ["error", indent],
+        "vue/script-indent": ["error", indent, {
             baseIndent: 0,
             switchCase: 0,
         }],
         "vue/html-quotes": ["error", "double", { "avoidEscape": true }],
-        "vue/max-attributes-per-line": ["error", {
-            "singleline": {
-                "max": 12,
-            },
-            "multiline": {
-                "max": 1,
-            },
-        }],
-        "vue/require-default-prop": "off",
+        "vue/max-attributes-per-line": "off",
         "vue/v-slot-style": ["error", {
             "atComponent": "shorthand",
             "default": "shorthand",
@@ -68,32 +58,60 @@ export function defineVueRules(config?: RulesConfig): Rules {
 }
 
 export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] {
-    const { files = [], v2, typescript, indent, rules } = config || {};
-    return [
-        ...pluginVue.configs[v2 ? "flat/vue2-recommended" :"flat/recommended"],
-        {
-            name: "yx1126/vue",
-            files: ["**/*.vue", ...files],
-            languageOptions: {
-                globals,
-                parser: VueParser,
-                parserOptions: {
-                    parser: typescript ? TsParser : null,
-                    extraFileExtensions: [".vue"],
-                    sourceType: "module",
-                    ecmaFeatures: {
-                        jsx: true,
-                    },
+    const { files = [], vueVersion = 3, typescript, indent = 4, sfcBlocks, rules } = config || {};
+    const verifySfc = isEnable(sfcBlocks, false);
+    const sfcConfig = getConfig(sfcBlocks);
+
+    return [{
+        name: "reallyx/vue/setup",
+        languageOptions: {
+            globals,
+        },
+        plugins: {
+            vue: pluginVue
+        }
+    }, {
+        name: "reallyx/vue",
+        files: ["*.vue", "**/*.vue", ...files],
+        languageOptions: {
+            parser: VueParser,
+            parserOptions: {
+                parser: typescript ? TsParser as any : null,
+                extraFileExtensions: [".vue"],
+                sourceType: "module",
+                ecmaFeatures: {
+                    jsx: true,
                 },
             },
-            rules: {
-                ...defineVueRules({ indent }),
-                ...rules
-            }
         },
-        {
-            name: "yx1126/vue/global",
-            rules: defineVueRules({ type: "global" })
+        processor: !verifySfc ? pluginVue.processors[".vue"] : mergeProcessors([
+            pluginVue.processors[".vue"],
+            processorVueBlocks({
+                ...sfcConfig,
+                blocks: {
+                    styles: true,
+                    ...sfcConfig.blocks,
+                },
+            }),
+        ]),
+        rules: {
+            ...pluginVue.configs.base.rules,
+            ...vueVersion === 2
+                ? {
+                    ...pluginVue.configs.essential.rules,
+                    ...pluginVue.configs["strongly-recommended"].rules,
+                    ...pluginVue.configs.recommended.rules,
+                }
+                : {
+                    ...pluginVue.configs["vue3-essential"].rules,
+                    ...pluginVue.configs["vue3-strongly-recommended"].rules,
+                    ...pluginVue.configs["vue3-recommended"].rules,
+                },
+            ...defineVueRules({ indent }),
+            "vue/require-default-prop": "off",
+            "vue/require-prop-types": "off",
+            "vue/multi-word-component-names": "off",
+            ...rules,
         }
-    ];
+    }];
 }

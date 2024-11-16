@@ -16,7 +16,6 @@ export {
     defineTsRules,
     defineVueRules,
     defineJsoncRules,
-    defineOrders,
     defineYamlRules,
     defineIgnoresRules,
     defineStylistic

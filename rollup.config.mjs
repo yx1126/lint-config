@@ -12,6 +12,7 @@ const external = [
     // eslint
     "vue-eslint-parser",
     "@typescript-eslint/parser",
+    "@typescript-eslint/eslint-plugin",
     "typescript-eslint",
     "eslint-define-config",
     "eslint-plugin-jsonc",

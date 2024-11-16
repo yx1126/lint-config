@@ -2,7 +2,7 @@ import { EslintConfig, FlatESLintConfig } from "./eslint";
 import defineBaseConfig, { defineRules } from "./configs/base";
 import defineTsConfig, { defineTsRules } from "./configs/typescript";
 import defineVueConfig, { defineVueRules } from "./configs/vue";
-import defineJsonConfig, { defineJsoncRules, defineOrders } from "./configs/jsonc";
+import defineJsonConfig, { defineJsoncRules, definePkgSort, defineTsSort } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
 import defineStylistic from "./configs/stylistic";
@@ -11,25 +11,19 @@ import { isEnable, getConfig } from "../utils";
 function defineEslint(config?: EslintConfig): FlatESLintConfig[];
 function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
-    const { jsonc, package: pkg, yaml, typescript, vue, stylistic: style } = config || {};
+    const { jsonc, package: pkg, tsconfig, yaml, typescript, vue, stylistic: style } = config || {};
     const verifyVue = isEnable(vue);
     const verifyTs = isEnable(typescript);
     const verifyJson = isEnable(jsonc);
     const verifyYaml = isEnable(yaml);
     const verifyStyle = isEnable(style);
-
     // stylistic options
-    const styleConfig = getConfig(style);
+    const styleConfig = getConfig(style, { indent: 4 });
 
     // javascript
-    const files = [...(config?.base?.files || [])];
-    if(verifyVue) {
-        files.push("**/*.vue");
-    }
     const result: FlatESLintConfig[] = [
         ...defineBaseConfig({
             ...config?.base,
-            files,
         }),
         ...defineIgnores(),
     ];
@@ -45,32 +39,28 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
             files: tsFiles,
         }));
     }
+    // stylistic
+    if(verifyStyle) {
+        result.push(defineStylistic(styleConfig) as any);
+    }
     // vue
     if(verifyVue) {
         result.push(...defineVueConfig({
             typescript: verifyTs,
-            indent: styleConfig.indent,
-            ...getConfig(vue),
+            ...getConfig(vue, { indent: styleConfig.indent }),
         }));
     }
     // jsonc
     if(verifyJson) {
         result.push(...defineJsonConfig({
-            indent: styleConfig.indent,
-            ...getConfig(jsonc),
-            package: pkg,
+            ...getConfig(jsonc, { indent: styleConfig.indent }),
+            package: pkg ?? true,
+            tsconfig: tsconfig ?? true,
         }));
     }
     // yaml
     if(verifyYaml) {
-        result.push(...defineYamlConfig({
-            indent: styleConfig.indent,
-            ...getConfig(yaml)
-        }));
-    }
-    // stylistic
-    if(verifyStyle) {
-        result.push(defineStylistic(styleConfig) as any);
+        result.push(...defineYamlConfig(getConfig(yaml, { indent: styleConfig.indent })));
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
     return result;
@@ -79,7 +69,7 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
 const configs = {
     base: defineEslint(),
     baseV2: defineEslint({
-        vue: { v2: true }
+        vue: { vueVersion: 2 }
     }),
     js: defineBaseConfig(),
     ts: [
@@ -97,7 +87,8 @@ export {
     defineTsRules,
     defineVueRules,
     defineJsoncRules,
-    defineOrders,
+    definePkgSort,
+    defineTsSort,
     defineYamlRules,
     defineIgnoresRules,
     defineStylistic,

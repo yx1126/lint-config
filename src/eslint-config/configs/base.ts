@@ -105,9 +105,10 @@ export function defineRules(): FlatESLintConfig["rules"] {
 export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
     const { files = [], rules } = config || {}
     return [{
-        name: "yx1126/base",
+        name: "reallyx/base",
         languageOptions: {
             ecmaVersion: "latest",
+            sourceType: "module",
             globals: {
                 ...globals.browser,
                 document: "readonly",
@@ -122,8 +123,8 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
             },
         },
     }, {
-        name: "yx1126/javascript",
-        files: ["**/*.?([cm])js", "**/*.?([cm])jsx", ...files],
+        name: "reallyx/javascript",
+        files,
         rules: {
             ...defineRules(),
             ...rules,
