@@ -1,4 +1,4 @@
-import eslint from "./eslint-config";
+import eslint from "./eslint-config"
 // eslint
 export type {
     BaseConfig,
@@ -8,7 +8,7 @@ export type {
     VueConfig,
     RulesConfig,
     EslintConfig,
-} from "./eslint-config/eslint";
+} from "./eslint-config/eslint"
 
 export {
     defineEslint,
@@ -18,13 +18,13 @@ export {
     defineJsoncRules,
     defineYamlRules,
     defineIgnoresRules,
-    defineStylistic
-} from "./eslint-config/index";
+    defineStylistic,
+} from "./eslint-config/index"
 
 // stylelint
-export type { CssConfig, ScssConfig, StylelintConfig } from "./stylelint-config/stylelint";
+export type { CssConfig, ScssConfig, StylelintConfig } from "./stylelint-config/stylelint"
 
-export { defineStyleLint, defineCssConfig, defineCssRules } from "./stylelint-config";
+export { defineStyleLint, defineCssConfig, defineCssRules } from "./stylelint-config"
 
 export default {
     eslint: eslint.configs,

@@ -1,9 +1,9 @@
-import type { FlatESLintConfig, TsConfig, Rules } from "../eslint";
-import tseslint from "typescript-eslint";
-import process from "node:process";
-import type { ParserOptions } from "@typescript-eslint/parser";
-import { parser as TsParser } from "typescript-eslint";
-import pluginTs from "@typescript-eslint/eslint-plugin";
+import type { FlatESLintConfig, TsConfig, Rules } from "../eslint"
+import tseslint from "typescript-eslint"
+import process from "node:process"
+import type { ParserOptions } from "@typescript-eslint/parser"
+import { parser as TsParser } from "typescript-eslint"
+import pluginTs from "@typescript-eslint/eslint-plugin"
 
 export function defineTsRules(): Rules {
     return {
@@ -35,8 +35,8 @@ export function defineTsRules(): Rules {
         "@typescript-eslint/no-unsafe-enum-comparison": "error",
         "@typescript-eslint/no-unsafe-unary-minus": "error",
         "@typescript-eslint/no-unused-vars": ["error", {
-            "varsIgnorePattern": "^_",
-            "argsIgnorePattern": "^_"
+            varsIgnorePattern: "^_",
+            argsIgnorePattern: "^_",
         }],
         "@typescript-eslint/no-use-before-define": ["error", {
             functions: false,
@@ -51,12 +51,12 @@ export function defineTsRules(): Rules {
         "@typescript-eslint/prefer-as-const": "error",
         "@typescript-eslint/triple-slash-reference": "error",
         "@typescript-eslint/no-empty-object-type": "error",
-        "@typescript-eslint/no-wrapper-object-types": "error"
+        "@typescript-eslint/no-wrapper-object-types": "error",
     }
 }
 
-export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[]   {
-    const { files = [], rules } = config || {};
+export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
+    const { files = [], rules } = config || {}
     return [
         tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
@@ -78,12 +78,37 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[]   
                 } as ParserOptions as any,
             },
             plugins: {
-                "@typescript-eslint": pluginTs as any
+                "@typescript-eslint": pluginTs as any,
             },
             rules: {
+                "no-unused-vars": "off",
+                "no-duplicate-imports": "off",
+                "consistent-return": "off",
+                "default-param-last": "off",
+                "dot-notation": "off",
+                "init-declarations": "off",
+                "max-params": "off",
+                "no-array-constructor": "off",
+                "no-dupe-class-members": "off",
+                "no-empty-function": "off",
+                "no-implied-eval": "off",
+                "no-invalid-this": "off",
+                "no-loop-func": "off",
+                "no-loss-of-precision": "off",
+                "no-magic-numbers": "off",
+                "no-redeclare": "off",
+                "no-restricted-imports": "off",
+                "no-shadow": "off",
+                "no-use-before-define": "off",
+                "no-useless-constructor": "off",
+                "no-throw-literal": "off",
+                "prefer-destructuring": "off",
+                "prefer-promise-reject-errors": "off",
+                "require-await": "off",
+                "no-return-await": "off",
                 ...defineTsRules(),
                 ...rules,
-            }
+            },
         },
-    ];
+    ]
 }

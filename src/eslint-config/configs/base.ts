@@ -1,11 +1,11 @@
-import type { FlatESLintConfig, BaseConfig } from "../eslint";
-import globals from "globals";
+import type { FlatESLintConfig, BaseConfig } from "../eslint"
+import globals from "globals"
 
 export function defineRules(): FlatESLintConfig["rules"] {
     return {
         "array-callback-return": ["error", {
             allowImplicit: true,
-            checkForEach: false
+            checkForEach: false,
         }],
         "constructor-super": "error",
         "for-direction": "error",
@@ -26,7 +26,7 @@ export function defineRules(): FlatESLintConfig["rules"] {
         "no-dupe-keys": "error",
         "no-duplicate-case": "error",
         "no-duplicate-imports": ["error", {
-            includeExports: true
+            includeExports: true,
         }],
         "no-empty-character-class": "error",
         "no-empty-pattern": "error",
@@ -56,8 +56,8 @@ export function defineRules(): FlatESLintConfig["rules"] {
         "no-unsafe-negation": "error",
         "no-unsafe-optional-chaining": "error",
         "no-unused-vars": ["error", {
-            "varsIgnorePattern": "^_",
-            "argsIgnorePattern": "^_"
+            varsIgnorePattern: "^_",
+            argsIgnorePattern: "^_",
         }],
         "no-use-before-define": ["error", {
             functions: false,
@@ -128,5 +128,5 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
             ...defineRules(),
             ...config?.rules,
         },
-    }];
+    }]
 }

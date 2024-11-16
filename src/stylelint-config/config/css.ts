@@ -1,6 +1,6 @@
-import type { Config } from "stylelint";
-import type { BaseConfig } from "../stylelint";
-import { flatFiles, getFiles } from "../../utils";
+import type { Config } from "stylelint"
+import type { BaseConfig } from "../stylelint"
+import { flatFiles, getFiles } from "../../utils"
 
 export function defineCssRules(): Config["rules"] {
     return {
@@ -98,5 +98,5 @@ export default function defineCssConfig(config?: BaseConfig): Required<Config>["
             ...defineCssRules(),
             ...config?.rules,
         },
-    }];
+    }]
 }

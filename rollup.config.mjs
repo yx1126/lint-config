@@ -1,31 +1,19 @@
 // @ts-check
-import { defineConfig } from "rollup";
-import typescript from "@rollup/plugin-typescript";
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import json from "@rollup/plugin-json";
-import dts from "rollup-plugin-dts";
+import { defineConfig } from "rollup"
+import typescript from "@rollup/plugin-typescript"
+import resolve from "@rollup/plugin-node-resolve"
+import commonjs from "@rollup/plugin-commonjs"
+import json from "@rollup/plugin-json"
+import dts from "rollup-plugin-dts"
+import fs from "fs-extra"
 
-const input = "./src/index.ts";
+const input = "./src/index.ts"
+const pkg = fs.readJsonSync("./package.json")
 
 const external = [
-    // eslint
+    ...Object.keys(pkg?.dependencies || {}),
     "vue-eslint-parser",
-    "@typescript-eslint/parser",
     "@typescript-eslint/eslint-plugin",
-    "typescript-eslint",
-    "eslint-define-config",
-    "eslint-plugin-jsonc",
-    "eslint-plugin-vue",
-    "eslint-plugin-yml",
-    "eslint",
-    "globals",
-    "@stylistic/eslint-plugin",
-    "eslint-processor-vue-blocks",
-    "eslint-merge-processors",
-    // stylelint
-    "postcss-scss",
-    "stylelint-scss"
 ]
 
 export default defineConfig([{
@@ -37,7 +25,7 @@ export default defineConfig([{
     }, {
         file: "./dist/index.js",
         format: "esm",
-        exports: "named"
+        exports: "named",
     }],
     plugins: [
         commonjs(),
@@ -50,8 +38,8 @@ export default defineConfig([{
     input,
     output: {
         file: "./dist/index.d.ts",
-        format: "esm"
+        format: "esm",
     },
     external,
-    plugins: [dts()]
-}]);
+    plugins: [dts()],
+}])

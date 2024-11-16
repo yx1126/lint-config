@@ -1,15 +1,15 @@
-import jsonc from "eslint-plugin-jsonc";
-import { getFlatRules } from "../../utils";
-import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../eslint";
+import jsonc from "eslint-plugin-jsonc"
+import { getFlatRules } from "../../utils"
+import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../eslint"
 
 export function defineJsoncRules(config?: RulesConfig): Rules {
-    const { indent = 4 } = config || {};
+    const { indent = 4 } = config || {}
     return {
         ...getFlatRules(jsonc.configs["flat/recommended-with-jsonc"]),
         "jsonc/array-bracket-newline": ["error",
             {
-                "multiline": true,
-                "minItems": null,
+                multiline: true,
+                minItems: null,
             },
         ],
         "jsonc/array-bracket-spacing": ["error", "never"],
@@ -18,9 +18,9 @@ export function defineJsoncRules(config?: RulesConfig): Rules {
         "jsonc/comma-style": ["error", "last"],
         "jsonc/key-spacing": ["error",
             {
-                "beforeColon": false,
-                "afterColon": true,
-                "mode": "strict",
+                beforeColon: false,
+                afterColon: true,
+                mode: "strict",
             },
         ],
         "jsonc/object-curly-newline": ["error", { multiline: true, consistent: true }],
@@ -98,7 +98,7 @@ export function definePkgSort(): FlatESLintConfig[] {
                     pathPattern: "^exports.*$",
                 },
             ],
-        }
+        },
     }]
 }
 
@@ -227,12 +227,12 @@ export function defineTsSort(): FlatESLintConfig[] {
                     pathPattern: "^compilerOptions$",
                 },
             ],
-        }
+        },
     }]
 }
 
 export default function defineJsonConfig(config?: JsonConfig): FlatESLintConfig[] {
-    const { files = [], indent = 4, package: pkg, tsconfig, rules } = config || {};
+    const { files = [], indent = 4, package: pkg, tsconfig, rules } = config || {}
     const result: FlatESLintConfig[] = [
         ...jsonc.configs["flat/base"],
         {
@@ -240,15 +240,15 @@ export default function defineJsonConfig(config?: JsonConfig): FlatESLintConfig[
             files: ["**/*.json", "**/*.json5", "**/*.jsonc", ...files],
             rules: {
                 ...defineJsoncRules({ indent }),
-                ...rules
-            }
+                ...rules,
+            },
         },
-    ];
+    ]
     if(pkg) {
-        result.push(...definePkgSort());
+        result.push(...definePkgSort())
     }
     if(tsconfig) {
-        result.push(...defineTsSort());
+        result.push(...defineTsSort())
     }
-    return result;
+    return result
 }

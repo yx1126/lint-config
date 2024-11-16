@@ -1,6 +1,6 @@
 import type { Linter } from "eslint"
-import type { RuleOptions } from "@stylistic/eslint-plugin/rule-options";
-import plugin from "@stylistic/eslint-plugin";
+import type { RuleOptions } from "@stylistic/eslint-plugin/rule-options"
+import plugin from "@stylistic/eslint-plugin"
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin"
 
 type Rules = Partial<{
@@ -47,10 +47,10 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         "@stylistic/key-spacing": ["error", { mode: "strict" }],
         "@stylistic/keyword-spacing": ["error", {
             overrides: {
-                "if": { "after": false },
-                "for": { "after": false },
-                "while": { "after": false },
-                "switch": { "after": false },
+                if: { after: false },
+                for: { after: false },
+                while: { after: false },
+                switch: { after: false },
             },
         }],
         "@stylistic/no-multi-spaces": "error",
@@ -79,6 +79,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
             multilineDetection: "brackets",
             singleline: {
                 delimiter: "semi",
+                requireLast: true,
             },
         }],
         "@stylistic/multiline-ternary": ["error", "always-multiline"],
@@ -165,13 +166,11 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
 
     if(pluginName !== "@stylistic") {
         const regex = /^@stylistic\//
-        rules = Object.fromEntries(
-            Object.entries(rules!)
-                .map(([ruleName, ruleConfig]) => [
-                    ruleName.replace(regex, `${pluginName}/`),
-                    ruleConfig,
-                ]),
-        )
+        rules = Object.fromEntries(Object.entries(rules!)
+            .map(([ruleName, ruleConfig]) => [
+                ruleName.replace(regex, `${pluginName}/`),
+                ruleConfig,
+            ]))
     }
 
     if(flat) {
@@ -182,16 +181,15 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
             },
             rules,
         } satisfies Linter.Config
-    } else {
-        if(pluginName !== "@stylistic")
-            throw new Error("PluginName in non-flat config can not be customized")
-
-        return {
-            ...{ name: "reallyx/style" },
-            plugins: ["@stylistic"],
-            rules,
-        } satisfies Linter.BaseConfig
     }
+    if(pluginName !== "@stylistic")
+        throw new Error("PluginName in non-flat config can not be customized")
+
+    return {
+        ...{ name: "reallyx/style" },
+        plugins: ["@stylistic"],
+        rules,
+    } satisfies Linter.BaseConfig
 }
 
-export default defineStylistic;
+export default defineStylistic

@@ -1,4 +1,4 @@
-import type { FlatESLintConfig } from "../eslint";
+import type { FlatESLintConfig } from "../eslint"
 
 export function defineIgnoresRules() {
     return [
@@ -40,6 +40,6 @@ export function defineIgnoresRules() {
 export default function defineIgnores(): FlatESLintConfig[] {
     return [{
         name: "reallyx/ignores",
-        ignores: defineIgnoresRules()
+        ignores: defineIgnoresRules(),
     }]
 }

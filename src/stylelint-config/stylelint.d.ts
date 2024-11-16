@@ -1,7 +1,8 @@
-import type { Config } from "stylelint";
-import type { IsEnable } from "../types";
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+import type { Config } from "stylelint"
+import type { IsEnable } from "../types"
 
-export type ConfigOverride = Required<Config>["overrides"];
+export type ConfigOverride = Required<Config>["overrides"]
 
 export interface BaseConfig {
     files?: ConfigOverride[number]["files"];
