@@ -21,6 +21,8 @@ const external = [
     "eslint",
     "globals",
     "@stylistic/eslint-plugin",
+    "eslint-processor-vue-blocks",
+    "eslint-merge-processors",
     // stylelint
     "postcss-scss",
     "stylelint-scss"
