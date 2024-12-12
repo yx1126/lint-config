@@ -10,16 +10,7 @@ export type {
     EslintConfig,
 } from "./eslint-config/eslint"
 
-export {
-    defineEslint,
-    defineRules,
-    defineTsRules,
-    defineVueRules,
-    defineJsoncRules,
-    defineYamlRules,
-    defineIgnoresRules,
-    defineStylistic,
-} from "./eslint-config/index"
+export * from "./eslint-config"
 
 // stylelint
 export type { CssConfig, ScssConfig, StylelintConfig } from "./stylelint-config/stylelint"

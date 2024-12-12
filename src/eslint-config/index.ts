@@ -91,15 +91,23 @@ const configs = {
 
 export {
     defineEslint,
+    // configs
+    defineBaseConfig,
+    defineTsConfig,
+    defineVueConfig,
+    defineJsonConfig,
+    definePkgSort,
+    defineTsSort,
+    defineYamlConfig,
+    defineIgnores,
+    defineStylistic,
+    // rules
     defineRules,
     defineTsRules,
     defineVueRules,
     defineJsoncRules,
-    definePkgSort,
-    defineTsSort,
     defineYamlRules,
     defineIgnoresRules,
-    defineStylistic,
 }
 
 export default {
