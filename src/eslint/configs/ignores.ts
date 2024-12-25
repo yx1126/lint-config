@@ -1,4 +1,4 @@
-import type { FlatESLintConfig } from "../eslint"
+import type { FlatESLintConfig } from "../eslint";
 
 export function defineIgnoresRules() {
     return [
@@ -34,12 +34,12 @@ export function defineIgnoresRules() {
         "**/__snapshots__",
         "**/auto-import?(s).d.ts",
         "**/components.d.ts",
-    ]
+    ];
 }
 
 export default function defineIgnores(): FlatESLintConfig[] {
     return [{
         name: "reallyx/ignores",
         ignores: defineIgnoresRules(),
-    }]
+    }];
 }

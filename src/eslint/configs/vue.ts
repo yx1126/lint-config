@@ -1,10 +1,10 @@
-import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../eslint"
-import pluginVue from "eslint-plugin-vue"
-import VueParser from "vue-eslint-parser"
-import { parser as TsParser } from "typescript-eslint"
-import { mergeProcessors } from "eslint-merge-processors"
-import processorVueBlocks from "eslint-processor-vue-blocks"
-import { getConfig, isEnable } from "../../utils"
+import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../eslint";
+import pluginVue from "eslint-plugin-vue";
+import VueParser from "vue-eslint-parser";
+import { parser as TsParser } from "typescript-eslint";
+import { mergeProcessors } from "eslint-merge-processors";
+import processorVueBlocks from "eslint-processor-vue-blocks";
+import { getConfig, isEnable } from "../../utils";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
     computed: "readonly",
@@ -21,10 +21,10 @@ const globals: Record<string, "readonly" | "writable" | false | "readable" | tru
     toRefs: "readonly",
     watch: "readonly",
     watchEffect: "readonly",
-}
+};
 
 export function defineVueRules(config?: RulesConfig): Rules {
-    const { indent = 4 } = config || {}
+    const { indent = 4 } = config || {};
     return {
         "vue/html-indent": ["error", indent],
         "vue/script-indent": ["error", indent, {
@@ -54,13 +54,13 @@ export function defineVueRules(config?: RulesConfig): Rules {
         "vue/component-name-in-template-casing": ["error", "kebab-case", {
             ignores: ["/^[A-Z][a-z0-9]+$/"],
         }],
-    }
+    };
 }
 
 export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] {
-    const { files = [], vueVersion = 3, typescript, indent = 4, sfcBlocks, rules } = config || {}
-    const verifySfc = isEnable(sfcBlocks, false)
-    const sfcConfig = getConfig(sfcBlocks)
+    const { files = [], vueVersion = 3, typescript, indent = 4, sfcBlocks, rules } = config || {};
+    const verifySfc = isEnable(sfcBlocks, false);
+    const sfcConfig = getConfig(sfcBlocks);
 
     return [{
         name: "reallyx/vue/setup",
@@ -115,5 +115,5 @@ export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] 
             "vue/multi-word-component-names": "off",
             ...rules,
         },
-    }]
+    }];
 }

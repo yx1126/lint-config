@@ -1,9 +1,9 @@
-import type { FlatESLintConfig, TsConfig, Rules } from "../eslint"
-import tseslint from "typescript-eslint"
-import process from "node:process"
-import type { ParserOptions } from "@typescript-eslint/parser"
-import { parser as TsParser } from "typescript-eslint"
-import pluginTs from "@typescript-eslint/eslint-plugin"
+import type { FlatESLintConfig, TsConfig, Rules } from "../eslint";
+import tseslint from "typescript-eslint";
+import process from "node:process";
+import type { ParserOptions } from "@typescript-eslint/parser";
+import { parser as TsParser } from "typescript-eslint";
+import pluginTs from "@typescript-eslint/eslint-plugin";
 
 export function defineTsRules(): Rules {
     return {
@@ -52,11 +52,11 @@ export function defineTsRules(): Rules {
         "@typescript-eslint/triple-slash-reference": "error",
         "@typescript-eslint/no-empty-object-type": "error",
         "@typescript-eslint/no-wrapper-object-types": "error",
-    }
+    };
 }
 
 export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
-    const { files = [], rules } = config || {}
+    const { files = [], rules } = config || {};
     return [
         tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
@@ -110,5 +110,5 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
                 ...rules,
             },
         },
-    ]
+    ];
 }

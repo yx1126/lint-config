@@ -20,6 +20,9 @@
         "yaml",
         "yml"
     ],
+    "eslint.options": {
+        "flags": ["unstable_ts_config"]
+    },
     "stylelint.enable": true,
     "stylelint.validate": [
         "css",

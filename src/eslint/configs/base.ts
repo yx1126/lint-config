@@ -1,5 +1,5 @@
-import type { FlatESLintConfig, BaseConfig } from "../eslint"
-import globals from "globals"
+import type { FlatESLintConfig, BaseConfig } from "../eslint";
+import globals from "globals";
 
 export function defineRules(): FlatESLintConfig["rules"] {
     return {
@@ -99,7 +99,7 @@ export function defineRules(): FlatESLintConfig["rules"] {
         "no-nonoctal-decimal-escape": "error",
         "no-shadow-restricted-names": "error",
         "no-throw-literal": "error",
-    }
+    };
 }
 
 export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
@@ -128,5 +128,5 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
             ...defineRules(),
             ...config?.rules,
         },
-    }]
+    }];
 }
