@@ -1,7 +1,7 @@
 {
     "name": "@reallyx/front-config",
     "type": "module",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "yx1126's Front config",
     "keywords": [
         "lint",
@@ -15,12 +15,23 @@
     "author": "yx1126",
     "files": ["dist"],
     "types": "./dist/index.d.ts",
-    "main": "./dist/index.js",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js",
             "require": "./dist/index.cjs"
+        },
+        "./eslint": {
+            "types": "./dist/eslint/index.d.ts",
+            "import": "./dist/eslint/index.js",
+            "require": "./dist/eslint/index.cjs"
+        },
+        "./stylelint": {
+            "types": "./dist/stylelint/index.d.ts",
+            "import": "./dist/stylelint/index.js",
+            "require": "./dist/stylelint/index.cjs"
         }
     },
     "homepage": "https://github.com/yx1126/front-config#readme",
