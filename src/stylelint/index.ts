@@ -3,6 +3,7 @@ import defineCssConfig, { defineCssRules } from "./config/css"
 import defineScssConfig, { defineScssRules } from "./config/scss"
 import { StylelintConfig } from "./stylelint"
 import { isEnable, getConfig, isStr } from "../utils"
+export type * from "./stylelint"
 
 export function defineStyleLint(config?: StylelintConfig): Config {
     const { css, scss, ...other } = config || {}

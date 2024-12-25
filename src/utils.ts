@@ -1,4 +1,4 @@
-import { FlatESLintConfig } from "./eslint-config/eslint"
+import { FlatESLintConfig } from "./eslint/eslint"
 import type { IsEnable } from "./types"
 
 export const isBol = (v: unknown): v is boolean => typeof v === "boolean"

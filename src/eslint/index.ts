@@ -8,6 +8,7 @@ import defineIgnores, { defineIgnoresRules } from "./configs/ignores"
 import defineStylistic from "./configs/stylistic"
 import { isEnable, getConfig } from "../utils"
 import { isPackageExists } from "local-pkg"
+export type * from "./eslint"
 
 const VuePackages = [
     "vue",

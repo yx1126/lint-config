@@ -7,7 +7,12 @@ import json from "@rollup/plugin-json"
 import dts from "rollup-plugin-dts"
 import fs from "fs-extra"
 
-const input = "./src/index.ts"
+const input = {
+    index: "./src/index.ts",
+    utils: "./src/utils.ts",
+    "eslint/index": "./src/eslint/index.ts",
+    "stylelint/index": "./src/stylelint/index.ts",
+}
 const pkg = fs.readJsonSync("./package.json")
 
 const external = [
@@ -19,13 +24,13 @@ const external = [
 export default defineConfig([{
     input,
     output: [{
-        file: "./dist/index.cjs",
-        format: "cjs",
-        exports: "named",
-    }, {
-        file: "./dist/index.js",
+        dir: "dist",
         format: "esm",
-        exports: "named",
+        entryFileNames: "[name].js",
+    }, {
+        dir: "dist",
+        format: "cjs",
+        entryFileNames: "[name].cjs",
     }],
     plugins: [
         commonjs(),
@@ -37,7 +42,8 @@ export default defineConfig([{
 }, {
     input,
     output: {
-        file: "./dist/index.d.ts",
+        // file: "./dist/index.d.ts",
+        dir: "dist",
         format: "esm",
     },
     external,
