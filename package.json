@@ -20,18 +20,36 @@
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs"
+            "import": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "require": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.cjs"
+            }
         },
         "./eslint": {
-            "types": "./dist/eslint/index.d.ts",
-            "import": "./dist/eslint/index.js",
-            "require": "./dist/eslint/index.cjs"
+            "types": "./dist/index.d.ts",
+            "import": {
+                "types": "./dist/eslint/index.d.ts",
+                "default": "./dist/eslint/index.js"
+            },
+            "require": {
+                "types": "./dist/eslint/index.d.ts",
+                "default": "./dist/eslint/index.cjs"
+            }
         },
         "./stylelint": {
-            "types": "./dist/stylelint/index.d.ts",
-            "import": "./dist/stylelint/index.js",
-            "require": "./dist/stylelint/index.cjs"
+            "types": "./dist/index.d.ts",
+            "import": {
+                "types": "./dist/stylelint/index.d.ts",
+                "default": "./dist/stylelint/index.js"
+            },
+            "require": {
+                "types": "./dist/stylelint/index.d.ts",
+                "default": "./dist/stylelint/index.cjs"
+            }
         }
     },
     "homepage": "https://github.com/yx1126/front-config#readme",
