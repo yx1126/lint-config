@@ -27,10 +27,12 @@ export default defineConfig([{
         dir: "dist",
         format: "esm",
         entryFileNames: "[name].js",
+        exports: "named",
     }, {
         dir: "dist",
         format: "cjs",
         entryFileNames: "[name].cjs",
+        exports: "named",
     }],
     plugins: [
         commonjs(),
