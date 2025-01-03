@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, TsConfig, Rules } from "../eslint";
+import type { FlatESLintConfig, TsConfig, Rules } from "../../../types/eslint";
 import tseslint from "typescript-eslint";
 import process from "node:process";
 import type { ParserOptions } from "@typescript-eslint/parser";

@@ -1,5 +1,5 @@
-import { FlatESLintConfig } from "./eslint/eslint";
-import type { IsEnable } from "./types";
+import type { IsEnable } from "../types/types";
+import type { EslintConfig, FlatESLintConfig } from "./eslint";
 
 export const isBol = (v: unknown): v is boolean => typeof v === "boolean";
 
@@ -22,10 +22,14 @@ export function getFlatRules(flats: FlatESLintConfig[]) {
  * @param {boolean} [defaultValue]
  * @returns {boolean}
  */
-export function isEnable<T extends object>(config?: IsEnable<T>, defaultValue = true): boolean {
+export function isEnable<T extends object>(config?: IsEnable<T>, defaultValue?: boolean): boolean {
     if(isBol(config)) return config;
-    if(isObj<T>(config)) return config?.enable ?? defaultValue;
-    return defaultValue;
+    if(isObj<T>(config)) {
+        if(isBol(config.enable)) return config.enable;
+        if(isBol(defaultValue)) return defaultValue;
+        return true;
+    }
+    return !!defaultValue;
 }
 
 /**
@@ -55,4 +59,27 @@ export function getFiles(files?: string | string[]) {
  */
 export function flatFiles(files: string[]) {
     return files.flatMap(f => [`*.${f}`, `**/*.${f}`]);
+}
+
+/**
+ *
+ * @param {EslintConfig} config
+ * @param {EslintConfig[]} [...values]
+ * @returns
+ */
+export function mergeConfig(config?: EslintConfig, ...values: EslintConfig[]) {
+    const baseConfig: EslintConfig = config || {};
+    values.forEach(item => {
+        Object.entries(item).forEach(([_key, value]) => {
+            const key = _key as keyof EslintConfig;
+            if(isObj(value)) {
+                baseConfig[key] = Object.assign(baseConfig[key] as any, value);
+            } else if(isArray(value)) {
+                baseConfig[key] = [...baseConfig[key] as any, ...value] as any;
+            } else {
+                baseConfig[key] = value as any;
+            }
+        });
+    });
+    return baseConfig;
 }

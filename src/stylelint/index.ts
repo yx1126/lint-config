@@ -1,9 +1,9 @@
 import type { Config } from "stylelint";
 import defineCssConfig, { defineCssRules } from "./config/css";
 import defineScssConfig, { defineScssRules } from "./config/scss";
-import { StylelintConfig } from "./stylelint";
+import { StylelintConfig } from "../../types/stylelint";
 import { isEnable, getConfig, isStr } from "../utils";
-export type * from "./stylelint";
+export type * from "../../types/stylelint";
 
 export function defineStyleLint(config?: StylelintConfig): Config {
     const { css, scss, ...other } = config || {};
@@ -40,4 +40,4 @@ export {
     defineScssRules,
 };
 
-export default {};
+export default defineStyleLint;

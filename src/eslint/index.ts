@@ -1,14 +1,15 @@
-import { EslintConfig, FlatESLintConfig } from "./eslint";
+import { EslintConfig, FlatESLintConfig } from "../../types/eslint";
 import defineBaseConfig, { defineRules } from "./configs/base";
 import defineTsConfig, { defineTsRules } from "./configs/typescript";
 import defineVueConfig, { defineVueRules } from "./configs/vue";
+import defineSvelteConfig, { defineSvelteRules } from "./configs/svelte";
 import defineJsonConfig, { defineJsoncRules, definePkgSort, defineTsSort } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
 import defineStylistic from "./configs/stylistic";
-import { isEnable, getConfig } from "../utils";
+import { isEnable, getConfig, mergeConfig } from "../utils";
 import { isPackageExists } from "local-pkg";
-export type * from "./eslint";
+export type * from "../../types/eslint";
 
 const VuePackages = [
     "vue",
@@ -20,14 +21,15 @@ const VuePackages = [
 function defineEslint(config?: EslintConfig): FlatESLintConfig[];
 function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
-    const { jsonc, package: pkg, tsconfig, yaml, typescript, vue, stylistic: style } = config || {};
+    const { json, package: pkg, tsconfig, yaml, typescript, vue, svelte, stylistic: style } = config || {};
     const verifyVue = isEnable(vue, VuePackages.some(i => isPackageExists(i)));
     const verifyTs = isEnable(typescript, isPackageExists("typescript"));
-    const verifyJson = isEnable(jsonc);
+    const verifySvelte = isEnable(svelte);
+    const verifyJson = isEnable(json);
     const verifyYaml = isEnable(yaml);
     const verifyStyle = isEnable(style);
     // stylistic options
-    const styleConfig = getConfig(style, { indent: 4 });
+    const styleConfig = getConfig(style);
 
     // javascript
     const result: FlatESLintConfig[] = [
@@ -59,12 +61,19 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
             ...getConfig(vue, { indent: styleConfig.indent }),
         }));
     }
+    // svelte
+    if(verifySvelte) {
+        result.push(...defineSvelteConfig({
+            typescript: verifyTs,
+            ...getConfig(svelte, { indent: styleConfig.indent }),
+        }));
+    }
     // jsonc
     if(verifyJson) {
         result.push(...defineJsonConfig({
-            ...getConfig(jsonc, { indent: styleConfig.indent }),
-            package: pkg ?? true,
-            tsconfig: tsconfig ?? true,
+            ...getConfig(json, { indent: styleConfig.indent }),
+            package: pkg,
+            tsconfig: verifyTs ? tsconfig ?? true : false,
         }));
     }
     // yaml
@@ -75,20 +84,21 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     return result;
 }
 
-const configs = {
-    base: defineEslint(),
-    baseV2: defineEslint({
-        vue: { vueVersion: 2 },
-    }),
-    js: defineBaseConfig(),
-    ts: [
-        ...defineBaseConfig(),
-        ...defineTsConfig(),
-    ],
-    ignores: defineIgnores(),
-    jsonc: defineJsonConfig(),
-    yaml: defineYamlConfig(),
-};
+export function defineReallyx(config?: EslintConfig): FlatESLintConfig[];
+export function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
+export function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
+    const _config: EslintConfig = mergeConfig({
+        package: true,
+        json: true,
+        stylistic: {
+            indent: 4,
+        },
+        yaml: {
+            indent: 2,
+        },
+    }, config || {});
+    return defineEslint(_config, ...flats);
+}
 
 export {
     defineEslint,
@@ -96,6 +106,7 @@ export {
     defineBaseConfig,
     defineTsConfig,
     defineVueConfig,
+    defineSvelteConfig,
     defineJsonConfig,
     definePkgSort,
     defineTsSort,
@@ -106,11 +117,10 @@ export {
     defineRules,
     defineTsRules,
     defineVueRules,
+    defineSvelteRules,
     defineJsoncRules,
     defineYamlRules,
     defineIgnoresRules,
 };
 
-export default {
-    configs,
-};
+export default defineEslint;

@@ -25,7 +25,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         pluginName = "@stylistic",
         quoteProps = "as-needed",
         quotes = "double",
-        semi = false,
+        semi = true,
     } = options;
 
     let rules: Rules = {

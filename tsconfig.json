@@ -12,6 +12,8 @@
     "include": [
         "src/**/*.ts",
         "src/**/*.d.ts",
+        "types/**/*.ts",
+        "types/**/*.d.ts",
         "eslint.config.ts"
     ],
     "exclude": [

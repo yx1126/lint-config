@@ -13,11 +13,13 @@ const input = {
     "eslint/index": "./src/eslint/index.ts",
     "stylelint/index": "./src/stylelint/index.ts",
 };
+
 const pkg = fs.readJsonSync("./package.json");
 
 const external = [
     ...Object.keys(pkg?.dependencies || {}),
     "vue-eslint-parser",
+    "svelte-eslint-parser",
     "@typescript-eslint/eslint-plugin",
 ];
 

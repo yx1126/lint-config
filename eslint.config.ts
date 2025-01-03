@@ -1,7 +1,8 @@
-import { defineEslint } from "./src";
+import { defineEslint } from "./src/eslint";
 
 export default defineEslint({
-    stylistic: {
-        semi: true,
-    },
+    json: true,
+    package: true,
+    tsconfig: true,
+    stylistic: true,
 });

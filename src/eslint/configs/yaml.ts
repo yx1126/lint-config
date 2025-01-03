@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, YamlConfig, Rules, RulesConfig } from "../eslint";
+import type { FlatESLintConfig, YamlConfig, Rules, RulesConfig } from "../../../types/eslint";
 import { getFlatRules } from "../../utils";
 import yml from "eslint-plugin-yml";
 

@@ -1,7 +1,7 @@
 import postcssScss from "postcss-scss";
 import stylelintScss from "stylelint-scss";
 import type { Config } from "stylelint";
-import { BaseConfig } from "../stylelint";
+import type { BaseConfig } from "../../../types/stylelint";
 import { flatFiles, getFiles } from "../../utils";
 
 export function defineScssRules(): Config["rules"] {

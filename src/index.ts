@@ -1,7 +1,4 @@
-import eslint from "./eslint";
-export { defineEslint } from "./eslint";
-export { defineStyleLint } from "./stylelint";
+export { defineEslint, type EslintConfig } from "./eslint";
+export { defineStyleLint, type StylelintConfig } from "./stylelint";
 
-export default {
-    eslint: eslint.configs,
-};
+export default {};

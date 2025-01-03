@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 import type { Config } from "stylelint";
-import type { IsEnable } from "../types";
+import type { IsEnable } from "./types";
 
 export type ConfigOverride = Required<Config>["overrides"];
 

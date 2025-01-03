@@ -1,7 +1,7 @@
 import type { FlatESLintConfig as BaseFlatESLintConfig } from "eslint-define-config";
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
-import type { IsEnable } from "../types";
+import type { IsEnable } from "./types";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
 import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 
@@ -42,15 +42,21 @@ export interface VueConfig extends BaseConfig, Indent {
     rules?: Rules;
 }
 
+export interface SvelteConfig<T = any> extends BaseConfig, Indent {
+    typescript?: boolean;
+    rules?: Rules;
+    svelteConfig?: T;
+}
+
 export interface EslintConfig {
     package?: boolean;
     tsconfig?: boolean;
-    deprecated?: boolean;
     base?: BaseConfig;
     yaml?: IsEnable<YamlConfig>;
-    jsonc?: IsEnable<Omit<JsonConfig, "package">>;
+    json?: IsEnable<Omit<JsonConfig, "package" | "tsconfig">>;
     typescript?: IsEnable<TsConfig>;
     vue?: IsEnable<VueConfig>;
+    svelte?: IsEnable<SvelteConfig>;
     stylistic?: IsEnable<StylisticCustomizeOptions<false>>;
     flatESLintConfig?: FlatESLintConfig[];
 }

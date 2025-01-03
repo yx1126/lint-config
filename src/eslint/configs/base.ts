@@ -1,4 +1,4 @@
-import type { FlatESLintConfig, BaseConfig } from "../eslint";
+import type { FlatESLintConfig, BaseConfig } from "../../../types/eslint";
 import globals from "globals";
 
 export function defineRules(): FlatESLintConfig["rules"] {
