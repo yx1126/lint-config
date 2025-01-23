@@ -30,7 +30,6 @@
             }
         },
         "./eslint": {
-            "types": "./dist/index.d.ts",
             "import": {
                 "types": "./dist/eslint/index.d.ts",
                 "default": "./dist/eslint/index.js"
@@ -41,7 +40,6 @@
             }
         },
         "./stylelint": {
-            "types": "./dist/index.d.ts",
             "import": {
                 "types": "./dist/stylelint/index.d.ts",
                 "default": "./dist/stylelint/index.js"

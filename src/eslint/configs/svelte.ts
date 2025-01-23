@@ -12,10 +12,12 @@ export function defineSvelteRules(config?: RulesConfig): Rules {
             {
                 indent,
                 switchCase: 0,
+                indentScript: false,
                 alignAttributesVertically: true,
             },
         ],
         "svelte/html-quotes": ["error", { prefer: "double" }],
+        "svelte/valid-compile": "off",
     };
 }
 

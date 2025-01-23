@@ -84,9 +84,9 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     return result;
 }
 
-export function defineReallyx(config?: EslintConfig): FlatESLintConfig[];
-export function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
-export function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
+function defineReallyx(config?: EslintConfig): FlatESLintConfig[];
+function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
+function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
     const _config: EslintConfig = mergeConfig({
         package: true,
         json: true,
@@ -102,6 +102,7 @@ export function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[
 
 export {
     defineEslint,
+    defineReallyx,
     // configs
     defineBaseConfig,
     defineTsConfig,
