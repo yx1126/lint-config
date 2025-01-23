@@ -1,7 +1,7 @@
 {
     "name": "@reallyx/front-config",
     "type": "module",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "yx1126's Front config",
     "keywords": [
         "lint",
