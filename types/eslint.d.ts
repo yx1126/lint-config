@@ -59,6 +59,8 @@ export interface EslintConfig {
     svelte?: IsEnable<SvelteConfig>;
     stylistic?: IsEnable<StylisticCustomizeOptions<false>>;
     flatESLintConfig?: FlatESLintConfig[];
+    ignore?: string[];
+    rules?: Rules;
 }
 
 export interface FlatESLintConfig extends BaseFlatESLintConfig {

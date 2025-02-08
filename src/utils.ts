@@ -73,9 +73,9 @@ export function mergeConfig(config?: EslintConfig, ...values: EslintConfig[]) {
         Object.entries(item).forEach(([_key, value]) => {
             const key = _key as keyof EslintConfig;
             if(isObj(value)) {
-                baseConfig[key] = Object.assign(baseConfig[key] as any, value);
+                baseConfig[key] = mergeConfig(baseConfig[key] as EslintConfig, value) as any;
             } else if(isArray(value)) {
-                baseConfig[key] = [...baseConfig[key] as any, ...value] as any;
+                baseConfig[key] = ([] as any).concat(baseConfig[key] || [], value) as any;
             } else {
                 baseConfig[key] = value as any;
             }

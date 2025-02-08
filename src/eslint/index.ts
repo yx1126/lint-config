@@ -21,7 +21,7 @@ const VuePackages = [
 function defineEslint(config?: EslintConfig): FlatESLintConfig[];
 function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
 function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
-    const { json, package: pkg, tsconfig, yaml, typescript, vue, svelte, stylistic: style } = config || {};
+    const { json, package: pkg, tsconfig, yaml, typescript, vue, svelte, stylistic: style, ignore, rules } = config || {};
     const verifyVue = isEnable(vue, VuePackages.some(i => isPackageExists(i)));
     const verifyTs = isEnable(typescript, isPackageExists("typescript"));
     const verifySvelte = isEnable(svelte);
@@ -36,7 +36,7 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         ...defineBaseConfig({
             ...config?.base,
         }),
-        ...defineIgnores(),
+        ...defineIgnores(ignore),
     ];
     // typescript
     if(verifyTs) {
@@ -79,6 +79,9 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     // yaml
     if(verifyYaml) {
         result.push(...defineYamlConfig(getConfig(yaml, { indent: styleConfig.indent })));
+    }
+    if(rules) {
+        flats.push({ rules });
     }
     result.push(...(config?.flatESLintConfig || []), ...flats);
     return result;

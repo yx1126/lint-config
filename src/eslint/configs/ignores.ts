@@ -37,9 +37,12 @@ export function defineIgnoresRules() {
     ];
 }
 
-export default function defineIgnores(): FlatESLintConfig[] {
+export default function defineIgnores(ignores?: string[]): FlatESLintConfig[] {
     return [{
         name: "reallyx/ignores",
-        ignores: defineIgnoresRules(),
+        ignores: [
+            ...defineIgnoresRules(),
+            ...ignores || [],
+        ],
     }];
 }
