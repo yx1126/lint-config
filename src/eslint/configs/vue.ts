@@ -1,10 +1,8 @@
-import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../../../types/eslint";
-import pluginVue from "eslint-plugin-vue";
-import VueParser from "vue-eslint-parser";
-import { parser as TsParser } from "typescript-eslint";
 import { mergeProcessors } from "eslint-merge-processors";
 import processorVueBlocks from "eslint-processor-vue-blocks";
 import { getConfig, isEnable } from "../../utils";
+import { interopDefault } from "../../utils";
+import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../../../types/eslint";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
     computed: "readonly",
@@ -57,11 +55,11 @@ export function defineVueRules(config?: RulesConfig): Rules {
     };
 }
 
-export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] {
+export default async function defineVueConfig(config?: VueConfig): Promise<FlatESLintConfig[]> {
     const { files = [], vueVersion = 3, typescript, indent = 4, sfcBlocks, rules } = config || {};
     const verifySfc = isEnable(sfcBlocks, false);
     const sfcConfig = getConfig(sfcBlocks);
-
+    const pluginVue = await interopDefault(import("eslint-plugin-vue"));
     return [{
         name: "reallyx/vue/setup",
         languageOptions: {
@@ -74,9 +72,9 @@ export default function defineVueConfig(config?: VueConfig): FlatESLintConfig[] 
         name: "reallyx/vue",
         files: ["*.vue", "**/*.vue", ...files],
         languageOptions: {
-            parser: VueParser,
+            parser: await interopDefault(import("vue-eslint-parser")),
             parserOptions: {
-                parser: typescript ? TsParser as any : null,
+                parser: typescript ? await interopDefault(import("@typescript-eslint/parser")) as any : null,
                 extraFileExtensions: [".vue"],
                 sourceType: "module",
                 ecmaFeatures: {

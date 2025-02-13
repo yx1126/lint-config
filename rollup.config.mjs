@@ -18,9 +18,6 @@ const pkg = fs.readJsonSync("./package.json");
 
 const external = [
     ...Object.keys(pkg?.dependencies || {}),
-    "vue-eslint-parser",
-    "svelte-eslint-parser",
-    "@typescript-eslint/eslint-plugin",
 ];
 
 export default defineConfig([{

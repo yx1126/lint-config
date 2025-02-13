@@ -9,6 +9,8 @@ import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
 import defineStylistic from "./configs/stylistic";
 import { isEnable, getConfig, mergeConfig } from "../utils";
 import { isPackageExists } from "local-pkg";
+import { FlatConfigComposer } from "eslint-flat-config-utils";
+import { Awaitable } from "../../types/types";
 export type * from "../../types/eslint";
 
 const VuePackages = [
@@ -18,10 +20,11 @@ const VuePackages = [
     "@slidev/cli",
 ];
 
-function defineEslint(config?: EslintConfig): FlatESLintConfig[];
-function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
-function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
+function defineEslint(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
+function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
+function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
     const { json, package: pkg, tsconfig, yaml, typescript, vue, svelte, stylistic: style, ignore, rules } = config || {};
+
     const verifyVue = isEnable(vue, VuePackages.some(i => isPackageExists(i)));
     const verifyTs = isEnable(typescript, isPackageExists("typescript"));
     const verifySvelte = isEnable(svelte);
@@ -32,11 +35,11 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     const styleConfig = getConfig(style);
 
     // javascript
-    const result: FlatESLintConfig[] = [
-        ...defineBaseConfig({
+    const result: Array<Awaitable<FlatESLintConfig[]>> = [
+        defineBaseConfig({
             ...config?.base,
         }),
-        ...defineIgnores(ignore),
+        defineIgnores(ignore),
     ];
     // typescript
     if(verifyTs) {
@@ -45,7 +48,7 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
         if(verifyVue) {
             tsFiles.push("**/*.vue");
         }
-        result.push(...defineTsConfig({
+        result.push(defineTsConfig({
             ...tsConfig,
             files: tsFiles,
         }));
@@ -56,21 +59,21 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     }
     // vue
     if(verifyVue) {
-        result.push(...defineVueConfig({
+        result.push(defineVueConfig({
             typescript: verifyTs,
             ...getConfig(vue, { indent: styleConfig.indent }),
         }));
     }
     // svelte
     if(verifySvelte) {
-        result.push(...defineSvelteConfig({
+        result.push(defineSvelteConfig({
             typescript: verifyTs,
             ...getConfig(svelte, { indent: styleConfig.indent }),
         }));
     }
     // jsonc
     if(verifyJson) {
-        result.push(...defineJsonConfig({
+        result.push(defineJsonConfig({
             ...getConfig(json, { indent: styleConfig.indent }),
             package: pkg,
             tsconfig: verifyTs ? tsconfig ?? true : false,
@@ -78,18 +81,20 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     }
     // yaml
     if(verifyYaml) {
-        result.push(...defineYamlConfig(getConfig(yaml, { indent: styleConfig.indent })));
+        result.push(defineYamlConfig(getConfig(yaml, { indent: styleConfig.indent })));
     }
     if(rules) {
         flats.push({ rules });
     }
-    result.push(...(config?.flatESLintConfig || []), ...flats);
-    return result;
+    result.push((config?.flatESLintConfig || []), flats);
+    const composer = new FlatConfigComposer<FlatESLintConfig>();
+    composer.append(...result);
+    return composer;
 }
 
-function defineReallyx(config?: EslintConfig): FlatESLintConfig[];
-function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[];
-function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatESLintConfig[] {
+function defineReallyx(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
+function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
+function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
     const _config: EslintConfig = mergeConfig({
         package: true,
         json: true,

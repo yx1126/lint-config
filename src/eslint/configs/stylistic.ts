@@ -1,6 +1,6 @@
+import { interopDefault } from "../../utils";
 import type { Linter } from "eslint";
 import type { RuleOptions } from "@stylistic/eslint-plugin/rule-options";
-import plugin from "@stylistic/eslint-plugin";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
 
 type Rules = Partial<{
@@ -11,9 +11,9 @@ type Rules = Partial<{
  * A factory function to defineStylistic the recommended config
  * @see https://github.com/eslint-stylistic/eslint-stylistic/blob/main/packages/eslint-plugin/configs/customize.ts#L15
  */
-function defineStylistic(options: StylisticCustomizeOptions<false>): Linter.BaseConfig;
-function defineStylistic(options?: StylisticCustomizeOptions): Linter.Config;
-function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Linter.Config | Linter.BaseConfig {
+async function defineStylistic(options: StylisticCustomizeOptions<false>): Promise<Linter.BaseConfig>;
+async function defineStylistic(options?: StylisticCustomizeOptions): Promise<Linter.Config>;
+async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Promise<Linter.Config | Linter.BaseConfig> {
     const {
         arrowParens = false,
         blockSpacing = true,
@@ -177,7 +177,7 @@ function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Lint
         return {
             name: "reallyx/style",
             plugins: {
-                [pluginName]: { ...plugin, configs: undefined },
+                [pluginName]: { ...await interopDefault(import("@stylistic/eslint-plugin")), configs: undefined },
             },
             rules,
         } satisfies Linter.Config;

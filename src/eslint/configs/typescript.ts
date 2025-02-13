@@ -1,9 +1,8 @@
-import type { FlatESLintConfig, TsConfig, Rules } from "../../../types/eslint";
 import tseslint from "typescript-eslint";
 import process from "node:process";
+import type { FlatESLintConfig, TsConfig, Rules } from "../../../types/eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
-import { parser as TsParser } from "typescript-eslint";
-import pluginTs from "@typescript-eslint/eslint-plugin";
+import { interopDefault } from "../../utils";
 
 export function defineTsRules(): Rules {
     return {
@@ -55,7 +54,7 @@ export function defineTsRules(): Rules {
     };
 }
 
-export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
+export default async function defineTsConfig(config?: TsConfig): Promise<FlatESLintConfig[]> {
     const { files = [], rules } = config || {};
     return [
         tseslint.configs.eslintRecommended as FlatESLintConfig,
@@ -63,7 +62,7 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
             name: "reallyx/typescript",
             files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             languageOptions: {
-                parser: TsParser,
+                parser: await interopDefault(import("@typescript-eslint/parser")) as any,
                 parserOptions: {
                     extraFileExtensions: [".vue"],
                     sourceType: "module",
@@ -78,7 +77,7 @@ export default function defineTsConfig(config?: TsConfig): FlatESLintConfig[] {
                 } as ParserOptions as any,
             },
             plugins: {
-                "@typescript-eslint": pluginTs as any,
+                "@typescript-eslint": await interopDefault(await import("@typescript-eslint/eslint-plugin")) as any,
             },
             rules: {
                 "no-unused-vars": "off",

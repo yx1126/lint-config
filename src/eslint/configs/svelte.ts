@@ -1,6 +1,4 @@
-import eslintPluginSvelte from "eslint-plugin-svelte";
-import SvelteParser from "svelte-eslint-parser";
-import { parser as TsParser } from "typescript-eslint";
+import { interopDefault } from "../../utils";
 import type { FlatESLintConfig, RulesConfig, SvelteConfig, Rules } from "../../../types/eslint";
 
 export function defineSvelteRules(config?: RulesConfig): Rules {
@@ -21,8 +19,9 @@ export function defineSvelteRules(config?: RulesConfig): Rules {
     };
 }
 
-export default function defineSvelteConfig(config: SvelteConfig): FlatESLintConfig[] {
+export default async function defineSvelteConfig(config: SvelteConfig): Promise<FlatESLintConfig[]> {
     const { files = [], typescript, svelteConfig, indent = 4, rules } = config || {};
+    const eslintPluginSvelte = await interopDefault(import("eslint-plugin-svelte"));
     return [{
         name: "reallyx/svelte/setup",
         plugins: {
@@ -32,9 +31,9 @@ export default function defineSvelteConfig(config: SvelteConfig): FlatESLintConf
         name: "reallyx/svelte",
         files: ["*.svelte", "**/*.svelte", ...files],
         languageOptions: {
-            parser: SvelteParser,
+            parser: await interopDefault(import("svelte-eslint-parser")),
             parserOptions: {
-                parser: typescript ? TsParser as any : null,
+                parser: typescript ? await interopDefault(import("@typescript-eslint/parser")) as any : null,
                 extraFileExtensions: [".svelte"],
                 sourceType: "module",
                 svelteConfig,
