@@ -20,10 +20,21 @@ const VuePackages = [
     "@slidev/cli",
 ];
 
-function defineEslint(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
-function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
-function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
-    const { json, package: pkg, tsconfig, yaml, typescript, vue, svelte, stylistic: style, ignore, rules } = config || {};
+function defineBaseEslint(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
+function defineBaseEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
+function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
+    const {
+        json,
+        package: pkg,
+        tsconfig,
+        yaml,
+        typescript,
+        vue,
+        svelte,
+        stylistic: style,
+        ignore,
+        rules,
+    } = config || {};
 
     const verifyVue = isEnable(vue, VuePackages.some(i => isPackageExists(i)));
     const verifyTs = isEnable(typescript, isPackageExists("typescript"));
@@ -92,9 +103,9 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
     return composer;
 }
 
-function defineReallyx(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
-function defineReallyx(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
-function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
+function defineEslint(config?: EslintConfig): FlatConfigComposer<FlatESLintConfig>;
+function defineEslint(config: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig>;
+function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): FlatConfigComposer<FlatESLintConfig> {
     const _config: EslintConfig = mergeConfig({
         package: true,
         json: true,
@@ -102,15 +113,16 @@ function defineReallyx(config?: EslintConfig, ...flats: FlatESLintConfig[]): Fla
             indent: 4,
         },
         yaml: {
+            enable: false,
             indent: 2,
         },
     }, config || {});
-    return defineEslint(_config, ...flats);
+    return defineBaseEslint(_config, ...flats);
 }
 
 export {
+    defineBaseEslint,
     defineEslint,
-    defineReallyx,
     // configs
     defineBaseConfig,
     defineTsConfig,
@@ -132,4 +144,4 @@ export {
     defineIgnoresRules,
 };
 
-export default defineEslint;
+export default defineBaseEslint;
