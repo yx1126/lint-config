@@ -1,7 +1,7 @@
 {
     "name": "@yx1126/lint-config",
     "type": "module",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "yx1126's Front config",
     "keywords": [
         "lint",
