@@ -1,5 +1,5 @@
 {
-    "name": "@reallyx/front-config",
+    "name": "@yx1126/lint-config",
     "type": "module",
     "version": "0.0.16",
     "description": "yx1126's Front config",
@@ -50,13 +50,13 @@
             }
         }
     },
-    "homepage": "https://github.com/yx1126/front-config#readme",
+    "homepage": "https://github.com/yx1126/lint-config#readme",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yx1126/front-config.git"
+        "url": "https://github.com/yx1126/lint-config.git"
     },
     "bugs": {
-        "url": "https://github.com/yx1126/front-config/issues"
+        "url": "https://github.com/yx1126/lint-config/issues"
     },
     "publishConfig": {
         "access": "public"

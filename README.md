@@ -1,9 +1,9 @@
-# @reallyx/front-config
+# @yx1126/lint-config
 
 ### Install
 
 ```bash
-pnpm add @reallyx/front-config -D
+pnpm add @yx1126/lint-config -D
 ```
 
 ## Eslint Usage
@@ -11,13 +11,14 @@ pnpm add @reallyx/front-config -D
 ### Config `eslint.config.mjs`
 
 ```javascript
-import { defineEslint } from "@reallyx/front-config";
+import { defineEslint } from "@yx1126/lint-config";
 
 export default defineEslint({
     // ...configs
 });
 ```
-EslintConfig see [configs](https://github.com/yx1126/front-config/blob/main/src/eslint-config/eslint.d.ts#L43)
+
+EslintConfig see [configs](https://github.com/yx1126/lint-config/blob/main/types/eslint.d.ts#L51)
 
 ### Add script for package.json
 
@@ -31,18 +32,20 @@ For example:
     }
 }
 ```
+
 ## Stylelint Usage
 
 ### Config `stylelint.config.mjs`
 
 ```javascript
-import { defineStyleLint } from "@reallyx/front-config";
+import { defineStyleLint } from "@yx1126/lint-config";
 
 export default defineStyleLint({
     // ...configs
 });
 ```
-StylelintConfig see [configs](https://github.com/yx1126/front-config/blob/main/src/stylelint-config/stylelint.d.ts#L15)
+
+StylelintConfig see [configs](https://github.com/yx1126/lint-config/blob/main/types/stylelint.d.ts#L16)
 
 ### Add script for package.json
 
@@ -52,7 +55,7 @@ For example:
 {
     "scripts": {
         "stylelint": "stylelint \"**/*.{css,scss}\"",
-        "stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix",
+        "stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix"
     }
 }
 ```
@@ -67,31 +70,15 @@ Add the following settings to your `settings.json`:
 {
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": false,
+        "source.fixAll.eslint": false
     },
     // eslint
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true,
-    "eslint.validate": [
-        "vue",
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"jsonc",
-		"json",
-		"json5",
-		"yaml",
-		"yml"
-    ],
+    "eslint.validate": ["vue", "javascript", "javascriptreact", "typescript", "typescriptreact", "jsonc", "json", "json5", "yaml", "yml"],
     // stylelint
     "stylelint.enable": true,
-    "stylelint.validate": [
-        "css",
-        "scss",
-        "sass",
-        "vue"
-    ],
+    "stylelint.validate": ["css", "scss", "sass", "vue"]
 }
 ```
 
