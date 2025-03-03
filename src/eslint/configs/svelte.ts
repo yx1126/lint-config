@@ -23,12 +23,12 @@ export default async function defineSvelteConfig(config: SvelteConfig): Promise<
     const { files = [], typescript, svelteConfig, indent = 4, rules } = config || {};
     const eslintPluginSvelte = await interopDefault(import("eslint-plugin-svelte"));
     return [{
-        name: "reallyx/svelte/setup",
+        name: "yx1126/svelte/setup",
         plugins: {
             svelte: eslintPluginSvelte as any,
         },
     }, {
-        name: "reallyx/svelte",
+        name: "yx1126/svelte",
         files: ["*.svelte", "**/*.svelte", ...files],
         languageOptions: {
             parser: await interopDefault(import("svelte-eslint-parser")),

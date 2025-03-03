@@ -39,7 +39,7 @@ export function defineIgnoresRules() {
 
 export default function defineIgnores(ignores?: string[]): FlatESLintConfig[] {
     return [{
-        name: "reallyx/ignores",
+        name: "yx1126/ignores",
         ignores: [
             ...defineIgnoresRules(),
             ...ignores || [],

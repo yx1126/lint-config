@@ -35,7 +35,7 @@ export function defineJsoncRules(config?: RulesConfig): Rules {
  */
 export function definePkgSort(): FlatESLintConfig[] {
     return [{
-        name: "reallyx/jsonc/package-json",
+        name: "yx1126/jsonc/package-json",
         files: ["**/package.json"],
         rules: {
             "jsonc/sort-keys": [
@@ -108,7 +108,7 @@ export function definePkgSort(): FlatESLintConfig[] {
  */
 export function defineTsSort(): FlatESLintConfig[] {
     return [{
-        name: "reallyx/jsonc/tsconfig-json",
+        name: "yx1126/jsonc/tsconfig-json",
         files: ["**/tsconfig.json", "**/tsconfig.*.json"],
         rules: {
             "jsonc/sort-keys": [
@@ -236,7 +236,7 @@ export default function defineJsonConfig(config?: JsonConfig): FlatESLintConfig[
     const result: FlatESLintConfig[] = [
         ...jsonc.configs["flat/base"],
         {
-            name: "reallyx/jsonc",
+            name: "yx1126/jsonc",
             files: ["**/*.json", "**/*.json5", "**/*.jsonc", ...files],
             rules: {
                 ...defineJsoncRules({ indent }),

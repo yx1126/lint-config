@@ -59,7 +59,7 @@ export default async function defineTsConfig(config?: TsConfig): Promise<FlatESL
     return [
         tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
-            name: "reallyx/typescript",
+            name: "yx1126/typescript",
             files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             languageOptions: {
                 parser: await interopDefault(import("@typescript-eslint/parser")) as any,

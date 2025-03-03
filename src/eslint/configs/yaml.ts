@@ -16,7 +16,7 @@ export default function defineYamlConfig(config?: YamlConfig): FlatESLintConfig[
     return [
         ...yml.configs["flat/base"],
         {
-            name: "reallyx/yaml",
+            name: "yx1126/yaml",
             files: ["**/*.y?(a)ml", ...files],
             rules: {
                 ...defineYamlRules({ indent }),

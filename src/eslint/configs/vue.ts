@@ -61,7 +61,7 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
     const sfcConfig = getConfig(sfcBlocks);
     const pluginVue = await interopDefault(import("eslint-plugin-vue"));
     return [{
-        name: "reallyx/vue/setup",
+        name: "yx1126/vue/setup",
         languageOptions: {
             globals,
         },
@@ -69,7 +69,7 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
             vue: pluginVue,
         },
     }, {
-        name: "reallyx/vue",
+        name: "yx1126/vue",
         files: ["*.vue", "**/*.vue", ...files],
         languageOptions: {
             parser: await interopDefault(import("vue-eslint-parser")),

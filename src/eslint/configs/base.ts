@@ -104,7 +104,7 @@ export function defineRules(): FlatESLintConfig["rules"] {
 
 export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
     return [{
-        name: "reallyx/base",
+        name: "yx1126/base",
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
@@ -122,7 +122,7 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
             },
         },
     }, {
-        name: "reallyx/javascript",
+        name: "yx1126/javascript",
         ...config,
         rules: {
             ...defineRules(),

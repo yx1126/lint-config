@@ -175,7 +175,7 @@ async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {})
 
     if(flat) {
         return {
-            name: "reallyx/style",
+            name: "yx1126/style",
             plugins: {
                 [pluginName]: { ...await interopDefault(import("@stylistic/eslint-plugin")), configs: undefined },
             },
@@ -186,7 +186,7 @@ async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {})
         throw new Error("PluginName in non-flat config can not be customized");
 
     return {
-        ...{ name: "reallyx/style" },
+        ...{ name: "yx1126/style" },
         plugins: ["@stylistic"],
         rules,
     } satisfies Linter.BaseConfig;
