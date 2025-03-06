@@ -79,7 +79,7 @@ async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {})
             multilineDetection: "brackets",
             singleline: {
                 delimiter: "semi",
-                requireLast: true,
+                requireLast: false,
             },
         }],
         "@stylistic/multiline-ternary": ["error", "always-multiline"],

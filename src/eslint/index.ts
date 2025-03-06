@@ -113,7 +113,7 @@ function defineEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): Flat
             indent: 4,
         },
         yaml: {
-            enable: false,
+            enable: true,
             indent: 2,
         },
     }, config || {});

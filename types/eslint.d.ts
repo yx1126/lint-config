@@ -38,7 +38,7 @@ export interface TsConfig extends BaseConfig {
 export interface VueConfig extends BaseConfig, Indent {
     vueVersion?: 2 | 3;
     typescript?: boolean;
-    sfcBlocks?: IsEnable<VueBlocksOptions>;
+    sfcBlocks?: boolean | VueBlocksOptions;
     rules?: Rules;
 }
 

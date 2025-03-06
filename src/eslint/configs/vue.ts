@@ -1,6 +1,5 @@
 import { mergeProcessors } from "eslint-merge-processors";
 import processorVueBlocks from "eslint-processor-vue-blocks";
-import { getConfig, isEnable } from "../../utils";
 import { interopDefault } from "../../utils";
 import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../../../types/eslint";
 
@@ -56,9 +55,8 @@ export function defineVueRules(config?: RulesConfig): Rules {
 }
 
 export default async function defineVueConfig(config?: VueConfig): Promise<FlatESLintConfig[]> {
-    const { files = [], vueVersion = 3, typescript, indent = 4, sfcBlocks, rules } = config || {};
-    const verifySfc = isEnable(sfcBlocks, false);
-    const sfcConfig = getConfig(sfcBlocks);
+    const { files = [], vueVersion = 3, typescript, indent = 4, rules } = config || {};
+    const sfcBlocks = config?.sfcBlocks === true ? {} : config?.sfcBlocks ?? {};
     const pluginVue = await interopDefault(import("eslint-plugin-vue"));
     return [{
         name: "yx1126/vue/setup",
@@ -82,15 +80,15 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
                 },
             },
         },
-        processor: !verifySfc
+        processor: sfcBlocks === false
             ? pluginVue.processors[".vue"]
             : mergeProcessors([
                 pluginVue.processors[".vue"],
                 processorVueBlocks({
-                    ...sfcConfig,
+                    ...sfcBlocks,
                     blocks: {
                         styles: true,
-                        ...sfcConfig.blocks,
+                        ...sfcBlocks.blocks,
                     },
                 }),
             ]),
