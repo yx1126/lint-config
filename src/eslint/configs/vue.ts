@@ -1,7 +1,7 @@
 import { mergeProcessors } from "eslint-merge-processors";
 import processorVueBlocks from "eslint-processor-vue-blocks";
 import { interopDefault } from "../../utils";
-import type { FlatESLintConfig, RulesConfig, VueConfig, Rules } from "../../../types/eslint";
+import type { FlatESLintConfig, VueRulesConfig, VueConfig, Rules } from "../../../types/eslint";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
     computed: "readonly",
@@ -20,8 +20,8 @@ const globals: Record<string, "readonly" | "writable" | false | "readable" | tru
     watchEffect: "readonly",
 };
 
-export function defineVueRules(config?: RulesConfig): Rules {
-    const { indent = 4 } = config || {};
+export function defineVueRules(config?: VueRulesConfig): Rules {
+    const { indent = 4, typescript, blockLang } = config || {};
     return {
         "vue/html-indent": ["error", indent],
         "vue/script-indent": ["error", indent, {
@@ -50,6 +50,36 @@ export function defineVueRules(config?: RulesConfig): Rules {
         }],
         "vue/component-name-in-template-casing": ["error", "kebab-case", {
             ignores: ["/^[A-Z][a-z0-9]+$/"],
+        }],
+        "vue/require-default-prop": "off",
+        "vue/require-prop-types": "off",
+        "vue/multi-word-component-names": "off",
+        "vue/block-tag-newline": ["error", {
+            singleline: "always",
+            multiline: "always",
+        }],
+        "vue/define-emits-declaration": ["error", "type-literal"],
+        "vue/define-macros-order": ["error", {
+            order: ["defineOptions", "defineModel", "defineProps", "defineEmits", "defineSlots"],
+            defineExposeLast: true,
+        }],
+        "vue/define-props-declaration": "error",
+        "vue/html-comment-indent": ["error", indent],
+        "vue/no-empty-component-block": "error",
+        "vue/no-this-in-before-route-enter": "error",
+        "vue/no-unused-emit-declarations": "error",
+        "vue/no-unused-refs": "error",
+        "vue/no-useless-v-bind": "error",
+        "vue/padding-line-between-blocks": "error",
+        "vue/prefer-true-attribute-shorthand": "error",
+        "vue/require-default-export": "error",
+        "vue/require-macro-variable-name": "error",
+        "vue/block-lang": ["error", {
+            script: {
+                lang: typescript ? ["ts", "tsx"] : ["jsx"],
+                allowNoLang: !typescript,
+            },
+            ...blockLang,
         }],
     };
 }
@@ -105,10 +135,7 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
                     ...pluginVue.configs["vue3-strongly-recommended"].rules,
                     ...pluginVue.configs["vue3-recommended"].rules,
                 },
-            ...defineVueRules({ indent }),
-            "vue/require-default-prop": "off",
-            "vue/require-prop-types": "off",
-            "vue/multi-word-component-names": "off",
+            ...defineVueRules({ indent, typescript }),
             ...rules,
         },
     }];

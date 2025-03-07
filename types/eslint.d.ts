@@ -7,12 +7,16 @@ import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 
 export type Rules = Linter.RulesRecord;
 
-export interface Indent {
+export interface RulesConfig {
     indent?: "tab" | number;
 };
 
-export interface RulesConfig extends Indent {
-    type?: "default" | "global";
+export interface VueRulesConfig extends RulesConfig {
+    typescript?: boolean;
+    blockLang?: Record<string, {
+        lang: string | string[];
+        allowNoLang?: boolean;
+    }>;
 }
 
 export interface BaseConfig {
@@ -20,13 +24,13 @@ export interface BaseConfig {
     rules?: FlatESLintConfig["rules"];
 }
 
-export interface JsonConfig extends BaseConfig, Indent {
+export interface JsonConfig extends BaseConfig, RulesConfig {
     package?: boolean;
     tsconfig?: boolean;
     rules?: Rules;
 }
 
-export interface YamlConfig extends BaseConfig, Indent {
+export interface YamlConfig extends BaseConfig, RulesConfig {
     rules?: Rules;
 }
 
@@ -35,14 +39,13 @@ export interface TsConfig extends BaseConfig {
     rules?: Rules;
 }
 
-export interface VueConfig extends BaseConfig, Indent {
+export interface VueConfig extends BaseConfig, VueRulesConfig {
     vueVersion?: 2 | 3;
-    typescript?: boolean;
     sfcBlocks?: boolean | VueBlocksOptions;
     rules?: Rules;
 }
 
-export interface SvelteConfig<T = any> extends BaseConfig, Indent {
+export interface SvelteConfig<T = any> extends BaseConfig, RulesConfig {
     typescript?: boolean;
     rules?: Rules;
     svelteConfig?: T;
