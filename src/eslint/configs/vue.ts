@@ -85,7 +85,7 @@ export function defineVueRules(config?: VueRulesConfig): Rules {
 }
 
 export default async function defineVueConfig(config?: VueConfig): Promise<FlatESLintConfig[]> {
-    const { files = [], vueVersion = 3, typescript, indent = 4, rules } = config || {};
+    const { files = [], vueVersion = 3, typescript, blockLang, indent = 4, rules } = config || {};
     const sfcBlocks = config?.sfcBlocks === true ? {} : config?.sfcBlocks ?? {};
     const pluginVue = await interopDefault(import("eslint-plugin-vue"));
     return [{
@@ -135,7 +135,7 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
                     ...pluginVue.configs["vue3-strongly-recommended"].rules,
                     ...pluginVue.configs["vue3-recommended"].rules,
                 },
-            ...defineVueRules({ indent, typescript }),
+            ...defineVueRules({ indent, typescript, blockLang }),
             ...rules,
         },
     }];
