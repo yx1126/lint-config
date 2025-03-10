@@ -11,15 +11,14 @@ type Rules = Partial<{
  * A factory function to defineStylistic the recommended config
  * @see https://github.com/eslint-stylistic/eslint-stylistic/blob/main/packages/eslint-plugin/configs/customize.ts#L15
  */
-async function defineStylistic(options: StylisticCustomizeOptions<false>): Promise<Linter.BaseConfig>;
+async function defineStylistic(options: StylisticCustomizeOptions): Promise<Linter.BaseConfig>;
 async function defineStylistic(options?: StylisticCustomizeOptions): Promise<Linter.Config>;
-async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {}): Promise<Linter.Config | Linter.BaseConfig> {
+async function defineStylistic(options: StylisticCustomizeOptions = {}): Promise<Linter.Config | Linter.BaseConfig> {
     const {
         arrowParens = false,
         blockSpacing = true,
         braceStyle = "1tbs",
         commaDangle = "always-multiline",
-        flat = true,
         indent = 4,
         jsx = true,
         pluginName = "@stylistic",
@@ -173,23 +172,13 @@ async function defineStylistic(options: StylisticCustomizeOptions<boolean> = {})
             ]));
     }
 
-    if(flat) {
-        return {
-            name: "yx1126/style",
-            plugins: {
-                [pluginName]: { ...await interopDefault(import("@stylistic/eslint-plugin")), configs: undefined },
-            },
-            rules,
-        } satisfies Linter.Config;
-    }
-    if(pluginName !== "@stylistic")
-        throw new Error("PluginName in non-flat config can not be customized");
-
     return {
-        ...{ name: "yx1126/style" },
-        plugins: ["@stylistic"],
+        name: "yx1126/style",
+        plugins: {
+            [pluginName]: await interopDefault(import("@stylistic/eslint-plugin")),
+        },
         rules,
-    } satisfies Linter.BaseConfig;
+    } satisfies Linter.Config;
 }
 
 export default defineStylistic;

@@ -102,9 +102,9 @@ export function defineRules(): FlatESLintConfig["rules"] {
     };
 }
 
-export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[] {
+export default function defineJsConfig(config?: BaseConfig): FlatESLintConfig[] {
     return [{
-        name: "yx1126/base",
+        name: "yx1126/javascript",
         languageOptions: {
             ecmaVersion: "latest",
             sourceType: "module",
@@ -122,11 +122,21 @@ export default function defineBaseConfig(config?: BaseConfig): FlatESLintConfig[
             },
         },
     }, {
-        name: "yx1126/javascript",
+        name: "yx1126/javascript/rules",
         ...config,
         rules: {
             ...defineRules(),
             ...config?.rules,
+        },
+    }, {
+        name: "yx1126/jsx",
+        files: ["**/*.?([cm])jsx", "**/*.?([cm])tsx"],
+        languageOptions: {
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
         },
     }];
 }

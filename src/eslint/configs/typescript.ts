@@ -55,7 +55,7 @@ export function defineTsRules(): Rules {
 }
 
 export default async function defineTsConfig(config?: TsConfig): Promise<FlatESLintConfig[]> {
-    const { files = [], rulesFiles = [], rules } = config || {};
+    const { files = [], rules } = config || {};
     return [
         tseslint.configs.eslintRecommended as FlatESLintConfig,
         {
@@ -85,7 +85,7 @@ export default async function defineTsConfig(config?: TsConfig): Promise<FlatESL
         },
         {
             name: "yx1126/typescript/rules",
-            files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files, ...rulesFiles],
+            files: ["**/*.?([cm])ts", "**/*.?([cm])tsx", ...files],
             rules: {
                 "no-unused-vars": "off",
                 "no-duplicate-imports": "off",

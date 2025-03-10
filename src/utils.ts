@@ -11,7 +11,7 @@ export const isArray = <T = any>(v: unknown): v is T[] => Array.isArray(v);
 
 export function getFlatRules(flats: FlatESLintConfig[]) {
     return flats.reduce<FlatESLintConfig["rules"]>((pre, item) => {
-        return Object.assign({}, pre, item.rules);
+        return Object.assign({ ...pre }, item.rules);
     }, {});
 }
 

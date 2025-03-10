@@ -1,6 +1,6 @@
 import { mergeProcessors } from "eslint-merge-processors";
 import processorVueBlocks from "eslint-processor-vue-blocks";
-import { interopDefault } from "../../utils";
+import { interopDefault, getFlatRules } from "../../utils";
 import type { FlatESLintConfig, VueRulesConfig, VueConfig, Rules } from "../../../types/eslint";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
@@ -105,6 +105,7 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
                 parser: typescript ? await interopDefault(import("@typescript-eslint/parser")) as any : null,
                 extraFileExtensions: [".vue"],
                 sourceType: "module",
+                ecmaVersion: "latest",
                 ecmaFeatures: {
                     jsx: true,
                 },
@@ -124,17 +125,17 @@ export default async function defineVueConfig(config?: VueConfig): Promise<FlatE
             ]),
         rules: {
             ...pluginVue.configs.base.rules,
-            ...vueVersion === 2
-                ? {
-                    ...pluginVue.configs.essential.rules,
-                    ...pluginVue.configs["strongly-recommended"].rules,
-                    ...pluginVue.configs.recommended.rules,
-                }
-                : {
-                    ...pluginVue.configs["vue3-essential"].rules,
-                    ...pluginVue.configs["vue3-strongly-recommended"].rules,
-                    ...pluginVue.configs["vue3-recommended"].rules,
-                },
+            ...getFlatRules(vueVersion === 2
+                ? [
+                    ...pluginVue.configs["flat/vue2-essential"],
+                    ...pluginVue.configs["flat/vue2-strongly-recommended"],
+                    ...pluginVue.configs["flat/vue2-recommended"],
+                ]
+                : [
+                    ...pluginVue.configs["flat/essential"],
+                    ...pluginVue.configs["flat/strongly-recommended"],
+                    ...pluginVue.configs["flat/recommended"],
+                ]),
             ...defineVueRules({ indent, typescript, blockLang }),
             ...rules,
         },

@@ -1,5 +1,5 @@
 import { EslintConfig, FlatESLintConfig } from "../../types/eslint";
-import defineBaseConfig, { defineRules } from "./configs/base";
+import defineBaseConfig, { defineRules } from "./configs/javascript";
 import defineTsConfig, { defineTsRules } from "./configs/typescript";
 import defineVueConfig, { defineVueRules } from "./configs/vue";
 import defineSvelteConfig, { defineSvelteRules } from "./configs/svelte";
@@ -55,13 +55,13 @@ function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): 
     // typescript
     if(verifyTs) {
         const tsConfig = getConfig(typescript);
-        const rulesFiles = [...(tsConfig?.rulesFiles || [])];
+        const files = [...(tsConfig?.files || [])];
         if(verifyVue) {
-            rulesFiles.push("**/*.vue");
+            files.push("**/*.vue");
         }
         result.push(defineTsConfig({
             ...tsConfig,
-            rulesFiles,
+            files,
         }));
     }
     // stylistic

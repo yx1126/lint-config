@@ -1,3 +1,3 @@
-import { defineStyleLint } from "./dist";
+import { defineStyleLint } from "./src/stylelint";
 
 export default defineStyleLint();

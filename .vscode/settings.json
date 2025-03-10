@@ -20,15 +20,11 @@
         "yaml",
         "yml"
     ],
-    "eslint.options": {
-        "flags": ["unstable_ts_config"]
-    },
     "stylelint.enable": true,
     "stylelint.validate": [
         "css",
         "scss",
-        "sass",
-        "vue"
+        "sass"
     ],
     "editor.cursorSmoothCaretAnimation": "on",
     "[typescript]": {
