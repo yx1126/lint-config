@@ -55,13 +55,13 @@ function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): 
     // typescript
     if(verifyTs) {
         const tsConfig = getConfig(typescript);
-        const tsFiles = [...(tsConfig?.files || [])];
+        const rulesFiles = [...(tsConfig?.rulesFiles || [])];
         if(verifyVue) {
-            tsFiles.push("**/*.vue");
+            rulesFiles.push("**/*.vue");
         }
         result.push(defineTsConfig({
             ...tsConfig,
-            files: tsFiles,
+            rulesFiles,
         }));
     }
     // stylistic

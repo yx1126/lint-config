@@ -37,6 +37,7 @@ export interface YamlConfig extends BaseConfig, RulesConfig {
 export interface TsConfig extends BaseConfig {
     parserOptions?: ParserOptions;
     rules?: Rules;
+    rulesFiles?: string[];
 }
 
 export interface VueConfig extends BaseConfig, VueRulesConfig {
