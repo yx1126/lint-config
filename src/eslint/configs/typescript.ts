@@ -76,6 +76,9 @@ export default async function defineTsConfig(config?: TsConfig): Promise<FlatESL
                     ...(config?.parserOptions as any),
                 } as ParserOptions as any,
             },
+        },
+        {
+            name: "yx1126/typescript/setup",
             plugins: {
                 "@typescript-eslint": await interopDefault(await import("@typescript-eslint/eslint-plugin")) as any,
             },
