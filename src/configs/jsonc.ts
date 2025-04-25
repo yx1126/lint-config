@@ -1,6 +1,6 @@
 import jsonc from "eslint-plugin-jsonc";
-import { getFlatRules } from "../../utils";
-import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../../../types/eslint";
+import { getFlatRules } from "../utils";
+import type { FlatESLintConfig, JsonConfig, RulesConfig, Rules } from "../../types/eslint";
 
 export function defineJsoncRules(config?: RulesConfig): Rules {
     const { indent = 4 } = config || {};

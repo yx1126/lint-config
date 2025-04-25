@@ -1,4 +1,3 @@
-import type { FlatESLintConfig as BaseFlatESLintConfig } from "eslint-define-config";
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
 import type { IsEnable } from "./types";
@@ -6,6 +5,8 @@ import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
 import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 
 export type Rules = Linter.RulesRecord;
+
+export type FlatESLintConfig = Linter.Config;
 
 export interface RulesConfig {
     indent?: "tab" | number;

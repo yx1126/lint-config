@@ -1,8 +1,8 @@
 import tseslint from "typescript-eslint";
 import process from "node:process";
-import type { FlatESLintConfig, TsConfig, Rules } from "../../../types/eslint";
+import type { FlatESLintConfig, TsConfig, Rules } from "../../types/eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
-import { interopDefault } from "../../utils";
+import { interopDefault } from "../utils";
 
 export function defineTsRules(typeChecked?: boolean): Rules {
     if(typeChecked) {
@@ -14,10 +14,11 @@ export function defineTsRules(typeChecked?: boolean): Rules {
             "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
             "@typescript-eslint/no-unnecessary-qualifier": "error",
             "@typescript-eslint/no-unnecessary-template-expression": "error",
-            "@typescript-eslint/no-unnecessary-type-arguments": "error",
+            "@typescript-eslint/no-unnecessary-type-arguments": "off",
             "@typescript-eslint/no-unsafe-enum-comparison": "error",
             "@typescript-eslint/only-throw-error": "error",
             "@typescript-eslint/no-for-in-array": "error",
+            "@typescript-eslint/no-unsafe-unary-minus": "error",
         };
     }
     return {
@@ -37,7 +38,6 @@ export function defineTsRules(typeChecked?: boolean): Rules {
         "@typescript-eslint/no-this-alias": "error",
         "@typescript-eslint/no-unnecessary-condition": "off",
         "@typescript-eslint/no-unsafe-declaration-merging": "error",
-        "@typescript-eslint/no-unsafe-unary-minus": "error",
         "@typescript-eslint/no-unused-vars": ["error", {
             varsIgnorePattern: "^_",
             argsIgnorePattern: "^_",

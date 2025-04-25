@@ -1,4 +1,4 @@
-import { interopDefault } from "../../utils";
+import { interopDefault } from "../utils";
 import type { Linter } from "eslint";
 import type { RuleOptions } from "@stylistic/eslint-plugin/rule-options";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";

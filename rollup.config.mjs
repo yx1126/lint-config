@@ -9,9 +9,6 @@ import fs from "fs-extra";
 
 const input = {
     index: "./src/index.ts",
-    utils: "./src/utils.ts",
-    "eslint/index": "./src/eslint/index.ts",
-    "stylelint/index": "./src/stylelint/index.ts",
 };
 
 const pkg = fs.readJsonSync("./package.json");

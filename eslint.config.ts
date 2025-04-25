@@ -1,4 +1,4 @@
-import { defineEslint } from "./src/eslint";
+import { defineEslint } from "./src";
 
 export default defineEslint({
     json: true,

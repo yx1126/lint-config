@@ -1,7 +1,7 @@
 import { mergeProcessors } from "eslint-merge-processors";
 import processorVueBlocks from "eslint-processor-vue-blocks";
-import { interopDefault, getFlatRules } from "../../utils";
-import type { FlatESLintConfig, VueRulesConfig, VueConfig, Rules } from "../../../types/eslint";
+import { interopDefault, getFlatRules } from "../utils";
+import type { FlatESLintConfig, VueRulesConfig, VueConfig, Rules } from "../../types/eslint";
 
 const globals: Record<string, "readonly" | "writable" | false | "readable" | true | "writeable" | "off"> = {
     computed: "readonly",
@@ -81,6 +81,12 @@ export function defineVueRules(config?: VueRulesConfig): Rules {
             },
             ...blockLang,
         }],
+        "vue/block-order": [
+            "error",
+            {
+                order: ["script", "template", "style", "i18n"],
+            },
+        ],
     };
 }
 

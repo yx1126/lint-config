@@ -1,5 +1,5 @@
 import type { IsEnable } from "../types/types";
-import type { EslintConfig, FlatESLintConfig } from "./eslint";
+import type { EslintConfig, FlatESLintConfig } from "../types/eslint";
 
 export const isBol = (v: unknown): v is boolean => typeof v === "boolean";
 
@@ -8,6 +8,14 @@ export const isObj = <T extends object>(v: unknown): v is T => Object.prototype.
 export const isStr = (v: unknown): v is string => typeof v === "string";
 
 export const isArray = <T = any>(v: unknown): v is T[] => Array.isArray(v);
+
+export function isFn<T extends Function>(val: unknown): val is T {
+    return typeof val === "function";
+}
+
+export function isPromise<T = any>(val: unknown): val is Promise<T> {
+    return (isObj(val) || isFn(val)) && isFn((val as any).then) && isFn((val as any).catch);
+}
 
 export function getFlatRules(flats: FlatESLintConfig[]) {
     return flats.reduce<FlatESLintConfig["rules"]>((pre, item) => {

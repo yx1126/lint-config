@@ -1,4 +1,4 @@
-import type { FlatESLintConfig } from "../../../types/eslint";
+import type { FlatESLintConfig } from "../../types/eslint";
 
 export function defineIgnoresRules() {
     return [

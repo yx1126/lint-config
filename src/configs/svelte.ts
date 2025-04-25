@@ -1,5 +1,5 @@
-import { interopDefault } from "../../utils";
-import type { FlatESLintConfig, RulesConfig, SvelteConfig, Rules } from "../../../types/eslint";
+import { interopDefault } from "../utils";
+import type { FlatESLintConfig, RulesConfig, SvelteConfig, Rules } from "../../types/eslint";
 
 export function defineSvelteRules(config?: RulesConfig): Rules {
     const { indent = 4 } = config || {};
