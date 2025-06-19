@@ -1,6 +1,6 @@
 import type { Linter } from "eslint";
 import type { ParserOptions } from "@typescript-eslint/parser";
-import type { IsEnable } from "./types";
+import type { IsEnable, VendoredPrettierOptions } from "./types";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
 import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 
@@ -53,6 +53,13 @@ export interface SvelteConfig<T = any> extends BaseConfig, RulesConfig {
     svelteConfig?: T;
 }
 
+export interface CssConfig extends BaseConfig, RulesConfig, Pick<StylisticCustomizeOptions, "quotes" | "semi"> {
+    prettierOptions?: VendoredPrettierOptions;
+    css?: BaseConfig;
+    scss?: BaseConfig;
+    less?: BaseConfig;
+}
+
 export interface EslintConfig {
     package?: boolean;
     tsconfig?: boolean;
@@ -62,7 +69,8 @@ export interface EslintConfig {
     typescript?: IsEnable<TsConfig>;
     vue?: IsEnable<VueConfig>;
     svelte?: IsEnable<SvelteConfig>;
-    stylistic?: IsEnable<StylisticCustomizeOptions<false>>;
+    css?: IsEnable<CssConfig>;
+    stylistic?: IsEnable<StylisticCustomizeOptions>;
     flatESLintConfig?: FlatESLintConfig[];
     ignore?: string[];
     rules?: Rules;

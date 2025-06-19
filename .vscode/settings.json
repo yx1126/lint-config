@@ -18,13 +18,11 @@
         "json",
         "json5",
         "yaml",
-        "yml"
-    ],
-    "stylelint.enable": true,
-    "stylelint.validate": [
+        "yml",
         "css",
         "scss",
-        "sass"
+        "sass",
+        "less"
     ],
     "editor.cursorSmoothCaretAnimation": "on",
     "[typescript]": {
@@ -49,6 +47,12 @@
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[yaml]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[scss]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     }
 }

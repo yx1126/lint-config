@@ -33,33 +33,6 @@ For example:
 }
 ```
 
-## Stylelint Usage
-
-### Config `stylelint.config.mjs`
-
-```javascript
-import { defineStyleLint } from "@yx1126/lint-config";
-
-export default defineStyleLint({
-    // ...configs
-});
-```
-
-StylelintConfig see [configs](https://github.com/yx1126/lint-config/blob/main/types/stylelint.d.ts#L16)
-
-### Add script for package.json
-
-For example:
-
-```json
-{
-    "scripts": {
-        "stylelint": "stylelint \"**/*.{css,scss}\"",
-        "stylelint:fix": "stylelint \"**/*.{css,scss}\" --fix"
-    }
-}
-```
-
 ### VS Code support (auto fix)
 
 Install [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
@@ -75,10 +48,7 @@ Add the following settings to your `settings.json`:
     // eslint
     "eslint.format.enable": true,
     "eslint.useFlatConfig": true,
-    "eslint.validate": ["vue", "javascript", "javascriptreact", "typescript", "typescriptreact", "jsonc", "json", "json5", "yaml", "yml"],
-    // stylelint
-    "stylelint.enable": true,
-    "stylelint.validate": ["css", "scss", "sass", "vue"]
+    "eslint.validate": ["vue", "javascript", "javascriptreact", "typescript", "typescriptreact", "jsonc", "json", "json5", "yaml", "yml", "css", "scss", "less"]
 }
 ```
 

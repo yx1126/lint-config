@@ -6,6 +6,7 @@ import defineSvelteConfig, { defineSvelteRules } from "./configs/svelte";
 import defineJsonConfig, { defineJsoncRules, definePkgSort, defineTsSort } from "./configs/jsonc";
 import defineYamlConfig, { defineYamlRules } from "./configs/yaml";
 import defineIgnores, { defineIgnoresRules } from "./configs/ignores";
+import defineCssConfig, { mergePrettierOptions } from "./configs/css";
 import defineStylistic from "./configs/stylistic";
 import { isEnable, getConfig, mergeConfig } from "./utils";
 import { isPackageExists } from "local-pkg";
@@ -31,6 +32,7 @@ function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): 
         typescript,
         vue,
         svelte,
+        css,
         stylistic: style,
         ignore,
         rules,
@@ -41,6 +43,7 @@ function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): 
     const verifySvelte = isEnable(svelte);
     const verifyJson = isEnable(json);
     const verifyYaml = isEnable(yaml);
+    const verifyCss = isEnable(css);
     const verifyStyle = isEnable(style);
     // stylistic options
     const styleConfig = getConfig(style);
@@ -94,6 +97,14 @@ function defineBaseEslint(config?: EslintConfig, ...flats: FlatESLintConfig[]): 
     if(verifyYaml) {
         result.push(defineYamlConfig(getConfig(yaml, { indent: styleConfig.indent })));
     }
+    // css
+    if(verifyCss) {
+        result.push(defineCssConfig({
+            semi: styleConfig.semi,
+            quotes: styleConfig.quotes,
+            ...getConfig(css),
+        }));
+    }
     if(rules) {
         flats.push({ rules });
     }
@@ -134,6 +145,7 @@ export {
     defineYamlConfig,
     defineIgnores,
     defineStylistic,
+    defineCssConfig,
     // rules
     defineRules,
     defineTsRules,
@@ -142,6 +154,8 @@ export {
     defineJsoncRules,
     defineYamlRules,
     defineIgnoresRules,
+    // utils
+    mergePrettierOptions,
 };
 
 export default defineBaseEslint;
